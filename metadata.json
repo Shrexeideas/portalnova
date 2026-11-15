@@ -1,0 +1,6 @@
+{
+  "name": "Don't Look At The Duck",
+  "description": "A first-person 3D psychological horror investigation set in an abandoned 1994 playground. Uncover the truth behind Tommy Mercer and missing investigator Julian Vance without maintaining direct eye contact.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

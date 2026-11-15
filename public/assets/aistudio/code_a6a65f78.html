@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Syne:wght@600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}
+::-webkit-scrollbar{display:none;}
+@keyframes pulse-slow{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.animate-rec-blink{animation:pulse-slow 1.6s cubic-bezier(0.4,0,0.6,1) infinite;}
+
+/* Creaking Swing Pendulum Physics */
+@keyframes creak-pendulum-left {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5.5deg); }
+  50% { transform: rotate(-0.5deg); }
+  75% { transform: rotate(-4.2deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes creak-pendulum-right {
+  0% { transform: rotate(-1.5deg); }
+  30% { transform: rotate(-6deg); }
+  65% { transform: rotate(4.8deg); }
+  100% { transform: rotate(-1.5deg); }
+}
+.swing-sway-left {
+  transform-origin: top center;
+  animation: creak-pendulum-left 4.8s ease-in-out infinite;
+}
+.swing-sway-right {
+  transform-origin: top center;
+  animation: creak-pendulum-right 5.6s ease-in-out infinite;
+}
+
+/* Atmospheric Weather: Rain streaks & Streetlight hum flicker */
+@keyframes rainfall {
+  0% { background-position: 0 0; }
+  100% { background-position: 25% 1000px; }
+}
+.rain-layer {
+  background-image: repeating-linear-gradient(105deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1.5px, transparent 2px, transparent 48px);
+  animation: rainfall 0.65s linear infinite;
+}
+@keyframes sodium-flicker {
+  0%, 100% { opacity: 0.88; }
+  22% { opacity: 0.92; }
+  23% { opacity: 0.35; }
+  24% { opacity: 0.85; }
+  72% { opacity: 0.89; }
+  73% { opacity: 0.2; }
+  74% { opacity: 0.75; }
+  75% { opacity: 0.95; }
+  88% { opacity: 0.5; }
+  90% { opacity: 0.88; }
+}
+.light-flicker {
+  animation: sodium-flicker 7s infinite ease-in-out;
+}
+
+/* Jumpscare Glitch & Violent Screen Quake */
+@keyframes scare-shake {
+  0% { transform: translate(0, 0) scale(1.15) rotate(0deg); filter: contrast(280%) invert(0.9) hue-rotate(90deg); }
+  20% { transform: translate(-28px, 18px) scale(1.3) rotate(-2deg); filter: contrast(350%) invert(1) hue-rotate(180deg); }
+  40% { transform: translate(25px, -22px) scale(1.4) rotate(3deg); filter: contrast(400%) invert(0.2) hue-rotate(270deg); }
+  60% { transform: translate(-35px, -15px) scale(1.45) rotate(-3deg); filter: contrast(500%) invert(1) saturate(3); }
+  80% { transform: translate(30px, 25px) scale(1.35) rotate(2deg); filter: contrast(300%) invert(0.8); }
+  100% { transform: translate(0, 0) scale(1.2) rotate(0deg); filter: contrast(200%) invert(0.4); }
+}
+.jumpscare-active {
+  animation: scare-shake 0.12s infinite;
+}
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#690005", "surface-dim": "#121416", "surface-container-high": "#282a2c", "primary": "#ffb4ab", "on-error-container": "#ffdad6", "surface-tint": "#ffb4ab", "secondary-container": "#394b5b", "surface-container": "#1e2022", "surface-container-lowest": "#0c0e10", "error-container": "#93000a", "tertiary-fixed-dim": "#cac6bb", "on-tertiary": "#323129", "on-background": "#e2e2e5", "outline-variant": "#5b403d", "surface-bright": "#38393c", "surface-container-highest": "#333537", "inverse-primary": "#ba181b", "on-secondary-fixed": "#0a1d2b", "tertiary": "#cac6bb", "error": "#ffb4ab", "secondary-fixed": "#d2e5f8", "surface-variant": "#333537", "inverse-on-surface": "#2f3033", "on-primary-fixed-variant": "#93000c", "secondary": "#b6c9dc", "on-tertiary-fixed": "#1d1c15", "tertiary-fixed": "#e6e2d7", "on-primary-fixed": "#410002", "on-primary": "#690006", "on-secondary-fixed-variant": "#374958", "on-secondary-container": "#a8bbcd", "on-tertiary-container": "#dcd8cc", "on-tertiary-fixed-variant": "#49473f", "primary-container": "#ba181b", "primary-fixed-dim": "#ffb4ab", "surface": "#121416", "on-surface-variant": "#e4beb9", "on-surface": "#e2e2e5", "background": "#121416", "tertiary-container": "#605e55", "primary-fixed": "#ffdad6", "surface-container-low": "#1a1c1e", "on-secondary": "#203241", "secondary-fixed-dim": "#b6c9dc", "on-primary-container": "#ffccc6", "inverse-surface": "#e2e2e5", "outline": "#ab8985" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-lg": "1.5rem", "gutter": "1rem", "margin-lg": "3rem", "space-md": "1rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin": "1.25rem", "space-xs": "0.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": ["Syne"], "display-lg": ["Syne"], "body-md": ["Courier Prime"], "body-sm": ["Courier Prime"], "body-lg": ["Courier Prime"], "headline-lg-mobile": ["Syne"], "label-md": ["Space Mono"], "label-lg": ["Space Mono"], "display-lg-mobile": ["Syne"], "label-sm": ["Space Mono"], "headline-sm": ["Syne"], "headline-md": ["Syne"] }, "fontSize": { "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "label-md": ["11px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }], "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.14em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }] } } } };</script></head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen relative selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden select-none">
+<!-- CRT Scanlines & Surveillance Vignette -->
+<div class="pointer-events-none fixed inset-0 z-40 shadow-[inset_0_0_120px_rgba(0,0,0,0.92)]"></div>
+<div class="pointer-events-none fixed inset-0 z-40 opacity-20 mix-blend-overlay" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(226, 226, 229, 0.05) 3px, rgba(226, 226, 229, 0.05) 3px);"></div>
+<!-- TOP HEADER NAVIGATION -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+<div class="h-16 w-full px-gutter-lg flex items-center justify-between gap-gutter">
+<div class="flex items-center gap-space-md">
+<img alt="Playground Files Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrC_9A2v80bA9bsEM1WSMURDZFXiJN248S_FtVh5vwewyZ4IJc9kuhiR9fAsB6cvQVikPqcGzCph6ZTj2nthJ5P75s77Hr7QmNMawzQ_W7pzB6_rdU5-K5suvfjhE4Cwta6KVGq61NN7dX5bnEgC9OE6StqttLsXUzD5SGBLTN0-4esSAHufgV4Y2Eiunxgu2wKPlXsaUoyZMZMuBKJ9Ty8xdplDDfR9lkDxJxyqlcbF"/>
+<div class="hidden sm:flex flex-col">
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wider leading-none">DON'T LOOK AT THE DUCK</span>
+<span class="font-label-sm text-label-sm uppercase text-outline tracking-widest mt-0.5">CASE FILE #89-DUCK / CLASSIFIED / EYES ONLY</span>
+</div>
+</div>
+<nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container">
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="main-menu" href="#main-menu">MAIN MENU</a>
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="case-briefing" href="#case-briefing">CASE BRIEFING</a>
+<a aria-current="page" class="px-space-sm py-1 font-label-md uppercase tracking-wider transition-all bg-primary-container text-on-primary-container cursor-pointer" data-path="gameplay-hud" href="#gameplay-hud">GAMEPLAY HUD</a>
+<button class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" id="nav-open-notebook">INVESTIGATION NOTEBOOK</button>
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="pause-and-system" href="#pause-and-system">PAUSE &amp; SYSTEM</a>
+<button class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider bg-error-container text-primary hover:bg-primary hover:text-on-primary transition-all cursor-pointer rounded-xs flex items-center gap-1" id="trigger-test-fail-btn">
+<span class="material-symbols-outlined text-[13px]">skull</span> TEST GAZE COLLAPSE
+      </button>
+</nav>
+<div class="flex items-center gap-space-md">
+<div class="hidden md:flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-md py-1.5 rounded">
+<div class="flex items-center gap-1 text-primary"><span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span><span>REC 00:04:18</span></div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface transition-colors" id="paranoia-freq-display">
+<span class="material-symbols-outlined text-[14px] text-tertiary">graphic_eq</span>
+<span id="paranoia-freq-text">PARANOIA FREQ: 14.2 Hz</span>
+</div>
+<span class="text-outline-variant">|</span>
+<span class="font-label-sm text-label-sm text-outline">42°19'N 71°04'W</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]">
+<div class="flex flex-col w-full relative select-none overflow-hidden bg-surface-container-lowest text-on-surface">
+<!-- ========================================================= -->
+<!-- INTERACTIVE 3D PLAYGROUND VIEWPORT (MOUSE-LOOK CAMERA)   -->
+<!-- ========================================================= -->
+<div class="relative w-full h-[calc(100vh-4rem)] overflow-hidden cursor-none" id="viewport-container" style="perspective: 1100px;">
+<!-- 3D Tilting Camera Canvas Container (Pans & tilts with lerp) -->
+<div class="absolute -inset-16 will-change-transform transition-transform duration-75 ease-out" id="camera-rig" style="transform-style: preserve-3d; transform: scale(1.1) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0);">
+<!-- Photographic Deep Background: Foggy Playground & Sodium streetlight -->
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLI-7RZWRIRJHp2C7_5dUOZT7Z_sJAAJEWCDyVKX9oNxzQQHhSBtRS2djpr3ubK3E864RPjHPwb1wD8OPWL_tDKHIz_NzUiOJSpE5hJa0WRGNHbIeZkPU3lriPNumxrrk1wDeHiG_guOOd9a3YuBf5XyHp4Otj2XjNBAytv_ZL3ia1sPaH8nNk07kcX-dEV50tyo-aV81qUc7joD-sokGuikMAA9kyHpExfu7B10c'); filter: brightness(0.9) contrast(1.08);">
+</div>
+<!-- Atmospheric Weather Layer: Rain Streaks & Drifting Night Mist -->
+<div class="absolute inset-0 pointer-events-none rain-layer opacity-45"></div>
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/60"></div>
+<!-- Flickering Sodium Streetlight Corona -->
+<div class="absolute top-[26%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full light-flicker pointer-events-none" style="background: radial-gradient(circle, rgba(255, 174, 66, 0.35) 0%, rgba(255, 140, 20, 0.12) 40%, transparent 75%);"></div>
+<!-- ========================================================= -->
+<!-- INTERACTIVE DIEGETIC HOTSPOTS & OBJECTS IN WORLD SPACE    -->
+<!-- ========================================================= -->
+<!-- 1. Creaking Rusty Swing Set (Oscillating with Realistic Wind Tension) -->
+<div class="absolute top-[32%] left-[21%] w-[220px] h-[340px] pointer-events-auto cursor-pointer group" id="hotspot-swings" title="Inspect Rusted Chains">
+<!-- Swaying left swing chain visual cue -->
+<div class="w-1.5 h-64 bg-amber-950/40 swing-sway-left absolute left-12 top-6 origin-top border-l border-white/10 flex flex-col justify-end items-center">
+<div class="w-12 h-3 bg-zinc-900 border border-stone-700/80 rounded-xs shadow-md"></div>
+</div>
+<!-- Swaying right swing chain visual cue -->
+<div class="w-1.5 h-64 bg-amber-950/40 swing-sway-right absolute left-36 top-6 origin-top border-l border-white/10 flex flex-col justify-end items-center">
+<div class="w-12 h-3 bg-zinc-900 border border-stone-700/80 rounded-xs shadow-md"></div>
+</div>
+<!-- Pulsing Target Ring -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full border border-primary/40 group-hover:border-primary group-hover:bg-primary/10 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary opacity-70 group-hover:scale-125 transition-transform">search</span>
+</div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-surface-container-lowest/90 px-2 py-0.5 border border-primary/30 rounded text-center opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<span class="font-label-sm text-label-sm text-primary font-bold">[CLICK / E] INSPECT RUSTED SWING</span>
+</div>
+</div>
+<!-- 2. Muddy Footprints / Webbed Puddle in Woodchips -->
+<div class="absolute bottom-[22%] left-[42%] w-44 h-32 pointer-events-auto cursor-pointer group" id="hotspot-mud" title="Examine Ground Impressions">
+<div class="w-full h-full rounded-[50%] bg-black/40 border border-secondary/20 group-hover:border-primary/80 group-hover:bg-primary-container/20 transition-all flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
+<span class="material-symbols-outlined text-secondary/60 group-hover:text-primary text-[20px] transition-colors">footprint</span>
+</div>
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-surface-container-lowest/90 px-2 py-0.5 border border-primary/30 rounded text-center opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<span class="font-label-sm text-label-sm text-secondary font-bold">[CLICK] EXAMINE WEBBED IMPRESSIONS</span>
+</div>
+</div>
+<!-- 3. Julian's Dropped Micro-Cassette Recorder -->
+<div class="absolute bottom-[18%] left-[29%] w-24 h-20 pointer-events-auto cursor-pointer group" id="hotspot-recorder" title="Play Julian's Tape">
+<div class="w-12 h-8 bg-zinc-900 border border-primary/60 rounded-xs flex items-center justify-center shadow-lg group-hover:border-primary group-hover:shadow-[0_0_15px_rgba(255,180,171,0.5)] transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink mr-1"></span>
+<span class="material-symbols-outlined text-primary text-[14px]">cassette</span>
+</div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-container-lowest/90 px-2 py-0.5 border border-primary/30 rounded text-center opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<span class="font-label-sm text-label-sm text-primary font-bold">[CLICK] PLAY MICRO-CASSETTE</span>
+</div>
+</div>
+<!-- 4. CORE THREAT: THE HOLLOW DUCK VISAGE ON CAROUSEL (MERRY-GO-ROUND) -->
+<!-- Looking here starts retinal warning and collapse trigger -->
+<div class="absolute top-[34%] right-[23%] w-48 h-56 pointer-events-auto cursor-none flex flex-col items-center justify-center group" id="duck-threat-zone" title="DO NOT DIRECT EYE CONTACT">
+<!-- Subtle Glitching Static Halo when gaze approaches -->
+<div class="w-24 h-24 rounded-full border border-error/0 transition-all duration-300 flex items-center justify-center" id="duck-aura">
+<span class="material-symbols-outlined text-error/0 transition-colors text-[28px]" id="duck-eye-icon">visibility</span>
+</div>
+<div class="mt-2 bg-surface-container-lowest/90 px-2 py-0.5 rounded-xs border border-transparent font-label-sm text-label-sm text-error opacity-40 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-md">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span>SPECIMEN #01 // GAZE HAZARD</span>
+</div>
+</div>
+</div><!-- End Camera Rig -->
+<!-- ========================================================= -->
+<!-- DYNAMIC FLASHLIGHT CONE & AMBIENT VIGNETTE OVERLAY        -->
+<!-- ========================================================= -->
+<div class="pointer-events-none absolute inset-0 mix-blend-screen opacity-90 transition-opacity duration-150" id="flashlight-beam" style="background: radial-gradient(circle 380px at 50% 50%, rgba(225, 235, 245, 0.32) 0%, rgba(186, 24, 27, 0.05) 45%, rgba(0, 0, 0, 0.94) 100%);">
+</div>
+<!-- RED PULSING PARANOIA / GAZE WARNING SCREEN VIGNETTE -->
+<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 shadow-[inset_0_0_180px_rgba(186,24,27,0.85)]" id="paranoia-screen-tint">
+</div>
+<!-- ========================================================= -->
+<!-- DYNAMIC RETICLE / CROSSHAIR WITH INERTIAL SWAY            -->
+<!-- ========================================================= -->
+<div class="pointer-events-none fixed z-30 transition-transform duration-75 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center" id="tactical-reticle" style="left: 50%; top: 50%;">
+<!-- Outer Brackets -->
+<div class="w-9 h-9 relative flex items-center justify-center transition-all duration-200" id="reticle-box">
+<div class="absolute w-2 h-2 top-0 left-0 border-t-2 border-l-2 border-primary/80"></div>
+<div class="absolute w-2 h-2 top-0 right-0 border-t-2 border-r-2 border-primary/80"></div>
+<div class="absolute w-2 h-2 bottom-0 left-0 border-b-2 border-l-2 border-primary/80"></div>
+<div class="absolute w-2 h-2 bottom-0 right-0 border-b-2 border-r-2 border-primary/80"></div>
+<!-- Center Dot & Target Ring -->
+<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(255,180,171,0.9)]" id="reticle-core"></div>
+<div class="absolute -bottom-5 font-label-sm text-[10px] text-primary whitespace-nowrap tracking-wider font-bold opacity-0 transition-opacity bg-black/70 px-1 rounded-xs" id="reticle-label">
+            TARGET ACQUIRED
+          </div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- 'DIRECT RETINAL FIXATION' GAZE WARNING GAUGE              -->
+<!-- ========================================================= -->
+<div class="absolute top-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 opacity-0 pointer-events-none transition-all duration-150" id="gaze-danger-banner">
+<div class="flex items-center gap-2 bg-error-container/95 border border-primary px- space-md py-1.5 rounded-sm shadow-[0_0_30px_rgba(186,24,27,0.7)] backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-[20px] animate-ping">visibility</span>
+<span class="font-label-md text-label-md text-on-error uppercase font-bold tracking-widest" id="gaze-warning-text">RETINAL LOCK: LOOK AWAY IMMEDIATELY!</span>
+</div>
+<!-- Progress Bar Meter toward Cognitive Collapse -->
+<div class="w-72 h-2 bg-surface-container-lowest border border-error/50 rounded-full overflow-hidden shadow-inner">
+<div class="w-0 h-full bg-primary transition-all duration-75" id="gaze-meter-fill"></div>
+</div>
+<div class="font-label-sm text-[10px] text-primary uppercase tracking-widest font-bold bg-black/80 px-2 py-0.5 rounded-xs" id="gaze-danger-counter">
+          DANGER GAZE EXPOSURE: 0.0s / 1.4s FATAL
+        </div>
+</div>
+<!-- ========================================================= -->
+<!-- TOP HUD BAR: OBJECTIVE, TIMESTAMP, EKG & PARANOIA METERS  -->
+<!-- ========================================================= -->
+<div class="absolute top-0 inset-x-0 p-gutter-lg flex items-start justify-between pointer-events-none z-30">
+<!-- Top Left: Mission Stamp & Diegetic Objective -->
+<div class="flex flex-col gap-space-xs max-w-xl pointer-events-auto">
+<div class="flex items-center gap-space-sm bg-surface-container-lowest/85 backdrop-blur-md px-space-md py-1 rounded-sm shadow-md">
+<span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span>
+<span class="font-label-md text-label-md text-primary tracking-widest font-bold">03:17:42 AM</span>
+<span class="text-outline-variant font-label-sm text-label-sm">/</span>
+<span class="font-label-sm text-label-sm text-tertiary tracking-wider uppercase">ENV TEMP: 41°F // RAIN &amp; HEAVY MIST</span>
+</div>
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-sm shadow-lg flex items-start gap-space-sm border-l-2 border-primary">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 animate-pulse">crisis_alert</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">PRIMARY DIRECTIVE</span>
+<span class="font-body-md text-body-md text-on-surface">OBJECTIVE: Locate Julian's tape recorder. <strong class="text-primary">AVOID DIRECT EYE CONTACT WITH THE CAROUSEL SPECIMEN.</strong></span>
+</div>
+</div>
+</div>
+<!-- Top Right: Biometric Composure & Audio/Paranoia Meter -->
+<div class="flex flex-col items-end gap-space-xs pointer-events-auto">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-sm shadow-lg flex flex-col items-end gap-space-xs border-r-2 border-primary">
+<div class="flex items-center gap-space-md">
+<!-- Pulsing EKG Graph -->
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary animate-pulse text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">HEART RATE:</span>
+<span class="font-label-lg text-label-lg text-primary font-bold transition-colors" id="bpm-val">92</span>
+<span class="font-label-sm text-label-sm text-outline">BPM</span>
+</div>
+<!-- Inline Dynamic Waveform -->
+<div class="w-28 h-6 relative overflow-hidden bg-surface-container-low px-1 rounded-sm flex items-center">
+<svg class="w-full h-full text-primary" fill="none" id="ekg-svg" viewbox="0 0 120 24">
+<path class="stroke-current" d="M0,12 L20,12 L26,4 L32,20 L38,2 L44,18 L48,12 L70,12 L76,6 L82,18 L88,12 L120,12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Paranoia Threshold Segments -->
+<div class="w-full flex items-center justify-between gap-space-md pt-1">
+<span class="font-label-sm text-label-sm text-outline uppercase">PARANOIA: <span class="text-primary font-bold" id="paranoia-level-label">STABLE</span></span>
+<div class="flex items-center gap-1" id="paranoia-pip-bar">
+<div class="w-3.5 h-1.5 bg-primary rounded-xs"></div>
+<div class="w-3.5 h-1.5 bg-primary rounded-xs"></div>
+<div class="w-3.5 h-1.5 bg-surface-container-high rounded-xs"></div>
+<div class="w-3.5 h-1.5 bg-surface-container-high rounded-xs"></div>
+<div class="w-3.5 h-1.5 bg-surface-container-high rounded-xs"></div>
+<div class="w-3.5 h-1.5 bg-surface-container-high rounded-xs"></div>
+</div>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-outline-variant bg-surface-container-lowest/80 px-space-sm py-0.5 rounded-sm">
+            SURVEILLANCE MICROPHONE ACTIVE // AGENT GAZE TRACKER ONLINE
+          </div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- BOTTOM HUD BAR: FLASHLIGHT, NOTEBOOK CLUES & CONTROL HINTS -->
+<!-- ========================================================= -->
+<div class="absolute bottom-0 inset-x-0 p-gutter-lg flex items-end justify-between pointer-events-none z-30">
+<!-- Bottom Left: Gear / Battery & Quick Evidence Trigger -->
+<div class="flex flex-col gap-space-sm pointer-events-auto">
+<!-- Flashlight Toggle -->
+<button class="flex items-center gap-space-md bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-sm shadow-lg hover:bg-surface-container-low transition-colors text-left border border-white/5" id="flashlight-toggle">
+<div class="w-7 h-7 rounded-sm bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]" id="flashlight-icon">flashlight_on</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">
+<span class="text-primary">[F]</span> FLASHLIGHT <span class="text-xs text-primary font-normal" id="flashlight-state-text">(ON)</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span>BATTERY:</span>
+<span class="text-on-surface font-bold" id="battery-num">74%</span>
+<div class="w-14 h-2 bg-surface-container-high rounded-xs overflow-hidden ml-1">
+<div class="w-[74%] h-full bg-primary" id="battery-bar"></div>
+</div>
+</div>
+</div>
+</button>
+<!-- Notebook Clues Indicator & Quick Drawer Opener -->
+<button class="flex items-center gap-space-md bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-sm shadow-lg hover:bg-surface-container-high transition-all text-left cursor-pointer group border border-transparent hover:border-primary/40" id="open-notebook-btn">
+<div class="w-7 h-7 rounded-sm bg-surface-container group-hover:bg-primary-container flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-tertiary group-hover:text-on-primary-container text-[18px]">menu_book</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider group-hover:text-primary transition-colors">
+<span class="text-tertiary group-hover:text-primary">[TAB]</span> INVESTIGATION NOTEBOOK
+              </div>
+<div class="font-label-sm text-label-sm text-outline">CASE EVIDENCE: <span class="text-on-surface font-bold" id="clues-counter">4 / 9 CLUES FOUND</span></div>
+</div>
+</button>
+</div>
+<!-- Center Notification Toast for Clue Discoveries -->
+<div class="opacity-0 translate-y-4 transition-all duration-300 pointer-events-none bg-surface-container-lowest/95 border-l-4 border-primary px-4 py-2.5 rounded shadow-2xl backdrop-blur-md flex items-center gap-3 max-w-md" id="diegetic-toast">
+<span class="material-symbols-outlined text-primary text-[20px]" id="toast-icon">info</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider" id="toast-subtitle">CASE FILE UPDATED</span>
+<span class="font-body-md text-sm text-on-surface" id="toast-body">Evidence cataloged in field notebook.</span>
+</div>
+</div>
+<!-- Bottom Right: Diegetic Controls HUD & Reticle Mode -->
+<div class="flex flex-col items-end gap-space-xs pointer-events-auto">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-sm rounded-sm shadow-lg flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant border border-white/5">
+<div class="flex items-center gap-1.5"><span class="text-primary font-bold">[MOUSE]</span><span>Camera Pan / Gaze</span></div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5"><span class="text-primary font-bold">[LMB]</span><span>Interact</span></div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5"><span class="text-primary font-bold">[F]</span><span>Flashlight</span></div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5"><span class="text-primary font-bold">[TAB]</span><span>Notebook</span></div>
+</div>
+<div class="flex items-center gap-2">
+<button class="font-label-sm text-label-sm text-error bg-error-container/30 hover:bg-error-container/80 px-space-sm py-0.5 rounded-sm transition-colors border border-error/40 flex items-center gap-1" id="direct-jumpscare-trigger">
+<span class="material-symbols-outlined text-[13px]">warning</span> TRIGGER TEST GAZE (FAILURE TEST)
+            </button>
+<div class="font-label-sm text-label-sm text-outline uppercase tracking-widest bg-surface-container-lowest/80 px-space-sm py-0.5 rounded-sm">
+              FIELD CAM FEED // REEL-REC-89.04
+            </div>
+</div>
+</div>
+</div>
+</div><!-- End Viewport Container -->
+<!-- ========================================================= -->
+<!-- SLIDE-IN INVESTIGATION NOTEBOOK DRAWER [TAB]              -->
+<!-- ========================================================= -->
+<div class="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-surface-container-lowest/95 backdrop-blur-2xl border-l border-outline-variant shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col pointer-events-auto" id="notebook-drawer">
+<!-- Drawer Header -->
+<div class="p-gutter-lg border-b border-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">INVESTIGATION LOG</span>
+</div>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-on-surface transition-colors font-label-md text-label-md" id="close-notebook-btn">
+          [ESC / TAB] CLOSE
+        </button>
+</div>
+<!-- Clues & Evidence Catalog -->
+<div class="flex-1 overflow-y-auto p-gutter-lg flex flex-col gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded border border-outline-variant/40">
+<span class="font-label-sm text-label-sm text-primary tracking-wider uppercase font-bold">CASE PROFILE: THE CAROUSEL ENTITY</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Agent Julian vanished at 03:22 AM. Audio transmissions captured escalating heartbeat rhythms followed by repeated screams: "DON'T LOOK DIRECTLY INTO ITS EYES". Maintain peripheral awareness only.
+          </p>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">RECORDED PLAYGROUND CLUES (5/9)</span>
+<!-- Clue 1: Rusted Chain Shard -->
+<div class="bg-surface-container p-3 rounded border-l-2 border-primary flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">broken_image</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-xs text-on-surface font-bold uppercase">ITEM #05: BRITTLE YELLOW BEAK SHARD</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Embedded into the chains of Swing #2. Polymer exhibits zero oxidation, despite 1989 weather records.</span>
+</div>
+</div>
+<!-- Clue 2: Muddy Webbed Footprints -->
+<div class="bg-surface-container p-3 rounded border-l-2 border-secondary flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">pets</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-xs text-on-surface font-bold uppercase">ITEM #06: WEBBED GAIT IMPRINTS</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Impressions 14 inches wide sunk 3 inches into drenched mulch. Footprints terminate abruptly at the merry-go-round.</span>
+</div>
+</div>
+<!-- Clue 3: Audio Tape Transcript -->
+<div class="bg-surface-container p-3 rounded border-l-2 border-error flex items-start gap-3">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5">mic</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-xs text-on-surface font-bold uppercase">ITEM #07: JULIAN'S FINAL CASSETTE (REEL 04)</span>
+<span class="font-body-sm text-xs text-on-surface-variant">"It doesn't move when you look at the swings... but when you turn your flashlight toward the merry-go-round, its neck turns toward you."</span>
+</div>
+</div>
+<div class="mt-4 p-3 bg-surface-container-lowest border border-dashed border-outline-variant text-center rounded">
+<span class="font-label-sm text-xs text-outline uppercase tracking-wider">[4 SLOTS REMAIN UNDISCOVERED IN PLAYGROUND GROUNDS]</span>
+</div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- INTERACTIVE AUDIO CASSETTE PLAYER MODAL                   -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4" id="audio-modal">
+<div class="max-w-md w-full bg-surface-container-lowest border border-primary/50 p-6 rounded-sm shadow-2xl flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-surface-container-high pb-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-rec-blink"></span>
+<span class="font-label-md text-label-md text-primary font-bold uppercase">MICRO-CASSETTE: AGENT JULIAN</span>
+</div>
+<button class="font-label-sm text-xs text-outline hover:text-white uppercase" id="close-audio-modal">[ESC] CLOSE</button>
+</div>
+<div class="bg-surface-container-low p-4 rounded flex flex-col items-center gap-3">
+<!-- Animated Audio Visualizer Bars -->
+<div class="flex items-end gap-1.5 h-16 w-full justify-center px-4" id="audio-bars">
+<div class="w-2 bg-primary rounded-t animate-pulse h-12"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-6"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-14"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-8"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-16"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-10"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-4"></div>
+<div class="w-2 bg-primary rounded-t animate-pulse h-13"></div>
+</div>
+<div class="font-body-sm text-xs text-tertiary text-center italic">
+            "[Heavy breathing, distant metal squeaking] ...It knows where the lens is pointed. Whatever you do, keep the light in the mud. Don't look at it."
+          </div>
+</div>
+<button class="w-full py-2 bg-primary-container text-on-primary-container font-label-md uppercase tracking-wider font-bold rounded-xs hover:bg-primary hover:text-on-primary transition-colors" id="audio-modal-ack">
+          STORE IN EVIDENCE NOTEBOOK
+        </button>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- VISCERAL ANALOG HORROR JUMPSCARE & COGNITIVE COLLAPSE    -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 pointer-events-none opacity-0 overflow-hidden bg-black flex items-center justify-center transition-opacity duration-75" id="jumpscare-overlay">
+<!-- High Contrast Inverted Duck Demon Visage -->
+<div class="w-full h-full bg-cover bg-center jumpscare-active" id="jumpscare-face" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLI-7RZWRIRJHp2C7_5dUOZT7Z_sJAAJEWCDyVKX9oNxzQQHhSBtRS2djpr3ubK3E864RPjHPwb1wD8OPWL_tDKHIz_NzUiOJSpE5hJa0WRGNHbIeZkPU3lriPNumxrrk1wDeHiG_guOOd9a3YuBf5XyHp4Otj2XjNBAytv_ZL3ia1sPaH8nNk07kcX-dEV50tyo-aV81qUc7joD-sokGuikMAA9kyHpExfu7B10c');">
+</div>
+<!-- Violent Static Flashes -->
+<div class="absolute inset-0 bg-red-600/30 mix-blend-color-burn animate-ping pointer-events-none"></div>
+<div class="absolute inset-0 bg-white/20 mix-blend-difference animate-pulse pointer-events-none"></div>
+<!-- Blood Splatter / Retinal Fracture Graphic Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<h1 class="font-headline-lg text-4xl sm:text-6xl text-primary font-black uppercase tracking-widest text-center drop-shadow-[0_0_25px_rgba(255,0,0,1)]">
+          DIRECT RETINAL FIXATION
+        </h1>
+<span class="font-label-md text-xl text-white tracking-[0.3em] uppercase mt-2 bg-black/80 px-4 py-1">
+          RETINAL HEMORRHAGE // FEED TERMINATED
+        </span>
+</div>
+</div>
+<!-- LOSS STATE: COGNITIVE COLLAPSE TELEMETRY DIALOG -->
+<div class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-gutter hidden opacity-0 transition-opacity duration-500" id="death-modal">
+<div class="max-w-xl w-full bg-surface-container-lowest border-2 border-error p-gutter-lg rounded-sm shadow-[0_0_80px_rgba(186,24,27,0.8)] flex flex-col gap-space-lg text-left">
+<div class="flex items-center gap-space-sm text-error">
+<span class="material-symbols-outlined text-[32px] animate-pulse">crisis_alert</span>
+<div>
+<div class="font-headline-sm text-headline-sm uppercase text-primary font-bold">COGNITIVE COLLAPSE DETECTED</div>
+<div class="font-label-sm text-label-sm text-outline uppercase tracking-wider">MIND-FEED DE-SYNC AT 03:17:44 AM // AGENT UNRESPONSIVE</div>
+</div>
+</div>
+<div class="p-space-md bg-surface-container rounded border border-outline-variant/30 font-body-md text-on-surface flex flex-col gap-2">
+<p class="text-error font-bold font-label-md uppercase">FATAL INSTRUCTION BREACH:</p>
+<p class="text-sm">You maintained continuous direct eye contact with the Merry-Go-Round Specimen for greater than 1.4 seconds. Optic nerves registered impossible spatial geometry.</p>
+<div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-surface-container-high font-label-sm text-xs text-outline">
+<div>TERMINAL HEART RATE: <span class="text-error font-bold">186 BPM</span></div>
+<div>PARANOIA LEVEL: <span class="text-error font-bold">100% (CRITICAL)</span></div>
+<div>STATUS: <span class="text-primary font-bold">CONTAINMENT BROKEN</span></div>
+<div>RECOVERED CLUES: <span class="text-white font-bold" id="death-clue-stat">5 / 9</span></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-end gap-space-md pt-2">
+<a class="w-full sm:w-auto px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md uppercase tracking-wider rounded-xs text-center" href="#case-briefing">
+            [ESC] RETURN TO DOSSIER
+          </a>
+<button class="w-full sm:w-auto px-space-lg py-space-sm bg-primary-container text-on-primary-container font-label-md text-label-md uppercase tracking-wider font-bold rounded-xs hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(186,24,27,0.5)]" id="respawn-btn">
+<span class="material-symbols-outlined text-[18px]">replay</span> RE-ENTER CHECKPOINT (WAKE UP)
+          </button>
+</div>
+</div>
+</div>
+<!-- FORENSIC EVIDENCE DETAIL MODAL -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl hidden items-center justify-center p-gutter" id="clue-detail-modal">
+<div class="max-w-xl w-full bg-surface-container p-space-xl rounded-sm shadow-2xl relative flex flex-col gap-space-lg border border-primary/40">
+<div class="flex items-center justify-between border-b border-surface-container-high pb-3">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">troubleshoot</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface" id="modal-clue-title">EVIDENCE ACQUIRED // CASE CLUE #05</span>
+</div>
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-wider rounded-xs" id="close-clue-detail">
+            [ESC] CLOSE
+          </button>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-md items-start">
+<div class="w-full sm:w-1/2 aspect-square bg-surface-container-low rounded-sm overflow-hidden relative shadow-inner">
+<div class="w-full h-full bg-cover bg-center" id="modal-clue-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDRn0Wygg7lBgY4PCECX_7iifrife1YJjFMCCpDhKLIHComy2cG9vlWSV7uyLbAcgFfyDATtjTW63oQX36Fb1hGS6vF9vLayoVgqU2_ktJkObpbiBc0Aw2JtHPLZ0cjOmG38JKdViPmqkw_L3pCqc0xca9PGPY892gHv0tvn1TVzPsS7GtuZgfMw8BSnv76EcsGyN4SLCLGY3Kz3UnB6eYvwedmOddtHAdO0cDGoho')">
+</div>
+<div class="absolute bottom-1 left-1 bg-surface-container-lowest/90 px-1.5 py-0.5 font-label-sm text-label-sm text-primary font-bold" id="modal-clue-code">
+              ITEM 05-A
+            </div>
+</div>
+<div class="w-full sm:w-1/2 flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">PRELIMINARY FORENSIC NOTES</span>
+<p class="font-body-md text-body-md text-on-surface" id="modal-clue-desc">
+              A fractured yellow synthetic fragment wedged tightly between the rusted iron links of Swing #2. Polymer composition matches no commercial playground equipment manufactured in Massachusetts.
+            </p>
+<div class="bg-surface-container-lowest p-space-sm rounded-xs font-body-sm text-body-sm text-primary" id="modal-clue-quote">
+              "Julian dropped his recorder right here. The mud nearby has broad webbed indentations measuring 14 inches across."
+            </div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-md pt-space-xs">
+<button class="px-space-md py-space-sm bg-primary-container text-on-primary-container font-label-md text-label-md uppercase tracking-wider font-bold rounded-xs hover:bg-primary hover:text-on-primary transition-colors cursor-pointer flex items-center gap-space-xs" id="store-clue-ack">
+<span class="material-symbols-outlined text-[16px]">archive</span> STORE IN EVIDENCE NOTEBOOK
+          </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="w-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)] py-space-md">
+<div class="w-full px-gutter-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink"></span>
+<span>SURVEILLANCE NODE: OAK-PARK-FEED-07</span>
+<span>//</span>
+<span>TERMINAL AUTH: AGENT-ARCHIVIST #412</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant text-center">
+      © 1989 FEDERAL BEHAVIORAL ANOMALY REPOSITORY. UNAUTHORIZED DISCLOSURE IS PUNISHABLE BY PERMANENT QUARANTINE.
+    </div>
+<div class="font-label-sm text-label-sm text-primary tracking-widest uppercase">
+      DO NOT MAINTAIN DIRECT EYE CONTACT
+    </div>
+</div>
+</footer>
+<!-- ========================================================= -->
+<!-- COMPLETE GAME ENGINE & IMMERSIVE AUDIO / GAZE LOGIC       -->
+<!-- ========================================================= -->
+<script>
+  (function initPlaygroundHorrorEngine() {
+    // DOM Elements
+    const viewport = document.getElementById('viewport-container');
+    const cameraRig = document.getElementById('camera-rig');
+    const flashlightBeam = document.getElementById('flashlight-beam');
+    const tacticalReticle = document.getElementById('tactical-reticle');
+    const reticleBox = document.getElementById('reticle-box');
+    const reticleCore = document.getElementById('reticle-core');
+    const reticleLabel = document.getElementById('reticle-label');
+    const flashlightToggle = document.getElementById('flashlight-toggle');
+    const flashlightIcon = document.getElementById('flashlight-icon');
+    const flashlightStateText = document.getElementById('flashlight-state-text');
+    const batteryNum = document.getElementById('battery-num');
+    const batteryBar = document.getElementById('battery-bar');
+    const bpmVal = document.getElementById('bpm-val');
+    const paranoiaLabel = document.getElementById('paranoia-level-label');
+    const paranoiaTint = document.getElementById('paranoia-screen-tint');
+    const duckZone = document.getElementById('duck-threat-zone');
+    const duckAura = document.getElementById('duck-aura');
+    const duckEyeIcon = document.getElementById('duck-eye-icon');
+    const gazeDangerBanner = document.getElementById('gaze-danger-banner');
+    const gazeMeterFill = document.getElementById('gaze-meter-fill');
+    const gazeDangerCounter = document.getElementById('gaze-danger-counter');
+    const jumpscareOverlay = document.getElementById('jumpscare-overlay');
+    const deathModal = document.getElementById('death-modal');
+    const respawnBtn = document.getElementById('respawn-btn');
+    const triggerTestFailBtn = document.getElementById('trigger-test-fail-btn');
+    const directJumpscareTrigger = document.getElementById('direct-jumpscare-trigger');
+    const notebookDrawer = document.getElementById('notebook-drawer');
+    const openNotebookBtn = document.getElementById('open-notebook-btn');
+    const navOpenNotebook = document.getElementById('nav-open-notebook');
+    const closeNotebookBtn = document.getElementById('close-notebook-btn');
+    const audioModal = document.getElementById('audio-modal');
+    const closeAudioModal = document.getElementById('close-audio-modal');
+    const audioModalAck = document.getElementById('audio-modal-ack');
+    const toast = document.getElementById('diegetic-toast');
+    const toastBody = document.getElementById('toast-body');
+    const toastSubtitle = document.getElementById('toast-subtitle');
+    const clueDetailModal = document.getElementById('clue-detail-modal');
+    const closeClueDetail = document.getElementById('close-clue-detail');
+    const storeClueAck = document.getElementById('store-clue-ack');
+
+    // Interactive Hotspots
+    const hotspotSwings = document.getElementById('hotspot-swings');
+    const hotspotMud = document.getElementById('hotspot-mud');
+    const hotspotRecorder = document.getElementById('hotspot-recorder');
+
+    // Game State
+    let flashlightOn = true;
+    let batteryLevel = 74;
+    let baseBpm = 92;
+    let currentBpm = 92;
+    let isLookingAtDuck = false;
+    let gazeTimer = 0; // in seconds
+    const GAZE_FATAL_LIMIT = 1.4; // seconds of continuous gaze triggers fatal jumpscare
+    let isDead = false;
+    let cluesFound = 5;
+
+    // Mouse coordinates & Smooth LERP
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentCamX = 0;
+    let currentCamY = 0;
+    let currentRotX = 0;
+    let currentRotY = 0;
+
+    // Show Diegetic Toast Notification
+    function showToast(title, message) {
+      if (!toast) return;
+      toastSubtitle.textContent = title;
+      toastBody.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 3500);
+    }
+
+    // 1. Mouse Tracking & 3D Perspective FPS Movement
+    if (viewport) {
+      viewport.addEventListener('mousemove', (e) => {
+        if (isDead) return;
+        const rect = viewport.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+
+        // Position crosshair
+        if (tacticalReticle) {
+          tacticalReticle.style.left = `${e.clientX}px`;
+          tacticalReticle.style.top = `${e.clientY}px`;
+        }
+
+        // Update Flashlight beam position
+        if (flashlightBeam && flashlightOn) {
+          flashlightBeam.style.background = `radial-gradient(circle 420px at ${mouseX}px ${mouseY}px, rgba(225, 235, 245, 0.32) 0%, rgba(186, 24, 27, 0.05) 45%, rgba(0, 0, 0, 0.94) 100%)`;
+        }
+      });
+    }
+
+    // Render loop for smooth camera lerp (First Person Body Cam Feel)
+    function renderCameraLoop() {
+      if (!isDead && viewport && cameraRig) {
+        const rect = viewport.getBoundingClientRect();
+        const normX = (mouseX / rect.width) - 0.5; // -0.5 to 0.5
+        const normY = (mouseY / rect.height) - 0.5;
+
+        // Target translations and rotations
+        const targetTranslateX = normX * -55;
+        const targetTranslateY = normY * -35;
+        const targetRotY = normX * 9.5; // camera pans left/right
+        const targetRotX = normY * -7.5; // camera tilts up/down
+
+        // Lerp interpolation
+        currentCamX += (targetTranslateX - currentCamX) * 0.08;
+        currentCamY += (targetTranslateY - currentCamY) * 0.08;
+        currentRotX += (targetRotX - currentRotX) * 0.08;
+        currentRotY += (targetRotY - currentRotY) * 0.08;
+
+        cameraRig.style.transform = `scale(1.12) translate3d(${currentCamX}px, ${currentCamY}px, 0) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+      }
+      requestAnimationFrame(renderCameraLoop);
+    }
+    requestAnimationFrame(renderCameraLoop);
+
+    // 2. Flashlight Toggle System
+    function toggleFlashlight() {
+      flashlightOn = !flashlightOn;
+      if (flashlightBeam) {
+        flashlightBeam.style.opacity = flashlightOn ? '0.9' : '0.04';
+      }
+      if (flashlightIcon) {
+        flashlightIcon.textContent = flashlightOn ? 'flashlight_on' : 'flashlight_off';
+      }
+      if (flashlightStateText) {
+        flashlightStateText.textContent = flashlightOn ? '(ON)' : '(OFF)';
+      }
+      showToast('SURVEILLANCE GEAR', flashlightOn ? 'Flashlight toggled [ACTIVE]' : 'Flashlight [POWER SAVING // OFF]');
+    }
+
+    if (flashlightToggle) {
+      flashlightToggle.addEventListener('click', toggleFlashlight);
+    }
+
+    // Slow Battery Drain & Entity Proximity Flicker
+    setInterval(() => {
+      if (flashlightOn && batteryLevel > 15) {
+        batteryLevel -= 1;
+        if (batteryNum) batteryNum.textContent = `${batteryLevel}%`;
+        if (batteryBar) batteryBar.style.width = `${batteryLevel}%`;
+      }
+      // Occasional entity interference flicker if looking near carousel
+      if (isLookingAtDuck && flashlightOn && flashlightBeam) {
+        flashlightBeam.style.opacity = (Math.random() > 0.4) ? '0.2' : '0.9';
+      }
+    }, 4500);
+
+    // 3. Notebook Drawer Slider
+    function toggleNotebook(forceState) {
+      const isOpen = notebookDrawer.classList.contains('translate-x-0');
+      const shouldOpen = forceState !== undefined ? forceState : !isOpen;
+      if (shouldOpen) {
+        notebookDrawer.classList.remove('translate-x-full');
+        notebookDrawer.classList.add('translate-x-0');
+      } else {
+        notebookDrawer.classList.add('translate-x-full');
+        notebookDrawer.classList.remove('translate-x-0');
+      }
+    }
+    if (openNotebookBtn) openNotebookBtn.addEventListener('click', () => toggleNotebook(true));
+    if (navOpenNotebook) navOpenNotebook.addEventListener('click', () => toggleNotebook(true));
+    if (closeNotebookBtn) closeNotebookBtn.addEventListener('click', () => toggleNotebook(false));
+
+    // 4. Hotspot Interactions
+    function setupHotspot(el, targetName, onClick) {
+      if (!el) return;
+      el.addEventListener('mouseenter', () => {
+        if (reticleBox) {
+          reticleBox.classList.add('scale-125', 'border-primary');
+        }
+        if (reticleCore) {
+          reticleCore.classList.add('bg-error', 'animate-ping');
+        }
+        if (reticleLabel) {
+          reticleLabel.textContent = targetName;
+          reticleLabel.classList.remove('opacity-0');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        if (reticleBox) {
+          reticleBox.classList.remove('scale-125', 'border-primary');
+        }
+        if (reticleCore) {
+          reticleCore.classList.remove('bg-error', 'animate-ping');
+        }
+        if (reticleLabel) {
+          reticleLabel.classList.add('opacity-0');
+        }
+      });
+      el.addEventListener('click', onClick);
+    }
+
+    // Swing set inspection
+    setupHotspot(hotspotSwings, 'RUSTED SWING #2', () => {
+      if (clueDetailModal) clueDetailModal.classList.remove('hidden');
+      clueDetailModal.classList.add('flex');
+    });
+
+    if (closeClueDetail) closeClueDetail.addEventListener('click', () => {
+      clueDetailModal.classList.add('hidden');
+      clueDetailModal.classList.remove('flex');
+    });
+    if (storeClueAck) storeClueAck.addEventListener('click', () => {
+      clueDetailModal.classList.add('hidden');
+      clueDetailModal.classList.remove('flex');
+      showToast('EVIDENCE LOGGED', 'Fragment preserved in dossier. Swing chain tension cataloged.');
+    });
+
+    // Muddy footprints examination
+    setupHotspot(hotspotMud, 'WEBBED ANOMALY TRACKS', () => {
+      showToast('FORENSIC SCAN', 'Subsurface impression depth indicates entity weight exceeds 420 lbs.');
+      currentBpm = Math.min(130, currentBpm + 14);
+      if (bpmVal) bpmVal.textContent = currentBpm;
+    });
+
+    // Audio recorder player
+    setupHotspot(hotspotRecorder, 'JULIAN\'S TAPE RECORDER', () => {
+      if (audioModal) {
+        audioModal.classList.remove('hidden');
+        audioModal.classList.add('flex');
+      }
+    });
+
+    if (closeAudioModal) closeAudioModal.addEventListener('click', () => {
+      audioModal.classList.add('hidden');
+      audioModal.classList.remove('flex');
+    });
+    if (audioModalAck) audioModalAck.addEventListener('click', () => {
+      audioModal.classList.add('hidden');
+      audioModal.classList.remove('flex');
+      showToast('TAPE CATALOGED', 'Reel 04 transcription added to investigation notebook.');
+    });
+
+    // 5. "DON'T LOOK AT THE DUCK" Gaze Danger & Terrifying Jumpscare Loss Sequence
+    if (duckZone) {
+      duckZone.addEventListener('mouseenter', () => {
+        isLookingAtDuck = true;
+        if (duckAura) duckAura.classList.add('border-error/80', 'bg-error-container/20');
+        if (duckEyeIcon) duckEyeIcon.classList.add('text-error', 'animate-pulse');
+        if (reticleLabel) {
+          reticleLabel.textContent = 'GAZE HAZARD // TURN AWAY';
+          reticleLabel.classList.remove('opacity-0');
+        }
+      });
+
+      duckZone.addEventListener('mouseleave', () => {
+        isLookingAtDuck = false;
+        if (duckAura) duckAura.classList.remove('border-error/80', 'bg-error-container/20');
+        if (duckEyeIcon) duckEyeIcon.classList.remove('text-error', 'animate-pulse');
+        if (reticleLabel) reticleLabel.classList.add('opacity-0');
+      });
+    }
+
+    // High frequency heartbeat / gaze exposure loop
+    setInterval(() => {
+      if (isDead) return;
+
+      if (isLookingAtDuck) {
+        gazeTimer += 0.1;
+        // Heart rate jumps drastically
+        currentBpm = Math.min(176, currentBpm + 8);
+        if (paranoiaTint) paranoiaTint.style.opacity = Math.min(0.9, gazeTimer / 1.1);
+        if (gazeDangerBanner) gazeDangerBanner.classList.remove('opacity-0');
+
+        // Progress bar fill
+        const ratio = Math.min(1, gazeTimer / GAZE_FATAL_LIMIT);
+        if (gazeMeterFill) gazeMeterFill.style.width = `${ratio * 100}%`;
+        if (gazeDangerCounter) gazeDangerCounter.textContent = `DANGER GAZE EXPOSURE: ${gazeTimer.toFixed(1)}s / ${GAZE_FATAL_LIMIT}s FATAL`;
+
+        if (paranoiaLabel) paranoiaLabel.textContent = 'CRITICAL // LOCK';
+
+        // FATAL TRIGGER: Exceeded 1.4 seconds of direct gaze
+        if (gazeTimer >= GAZE_FATAL_LIMIT) {
+          triggerJumpscareSequence();
+        }
+      } else {
+        // Looking away: cooldown and relax heart rate
+        if (gazeTimer > 0) {
+          gazeTimer = Math.max(0, gazeTimer - 0.25);
+          const ratio = Math.min(1, gazeTimer / GAZE_FATAL_LIMIT);
+          if (gazeMeterFill) gazeMeterFill.style.width = `${ratio * 100}%`;
+          if (gazeDangerCounter) gazeDangerCounter.textContent = `DANGER GAZE EXPOSURE: ${gazeTimer.toFixed(1)}s / ${GAZE_FATAL_LIMIT}s FATAL`;
+          if (gazeTimer === 0 && gazeDangerBanner) {
+            gazeDangerBanner.classList.add('opacity-0');
+          }
+        }
+        if (paranoiaTint) paranoiaTint.style.opacity = '0';
+        if (currentBpm > baseBpm) {
+          currentBpm = Math.max(baseBpm, currentBpm - 3);
+        }
+        if (paranoiaLabel) {
+          paranoiaLabel.textContent = currentBpm > 115 ? 'ELEVATED' : 'STABLE';
+        }
+      }
+
+      if (bpmVal) bpmVal.textContent = currentBpm;
+    }, 100);
+
+    // TRIGGER FULL VISCERAL JUMPSCARE & LOSS STATE
+    function triggerJumpscareSequence() {
+      if (isDead) return;
+      isDead = true;
+
+      // 1. Instantly trigger violent screeching visual jumpscare
+      if (jumpscareOverlay) {
+        jumpscareOverlay.classList.remove('opacity-0');
+        jumpscareOverlay.classList.add('opacity-100');
+      }
+
+      // 2. Play intense visual shutter / lens crack / color flash for 1.8 seconds
+      setTimeout(() => {
+        if (jumpscareOverlay) {
+          jumpscareOverlay.classList.add('opacity-0');
+          jumpscareOverlay.classList.remove('opacity-100');
+        }
+        // 3. Reveal Cognitive Collapse Terminal Loss Overlay
+        if (deathModal) {
+          deathModal.classList.remove('hidden');
+          setTimeout(() => deathModal.classList.remove('opacity-0'), 20);
+        }
+      }, 1600);
+    }
+
+    // Direct Test Scare Buttons
+    if (triggerTestFailBtn) triggerTestFailBtn.addEventListener('click', triggerJumpscareSequence);
+    if (directJumpscareTrigger) directJumpscareTrigger.addEventListener('click', triggerJumpscareSequence);
+
+    // Respawn / Wake up checkpoint
+    if (respawnBtn) {
+      respawnBtn.addEventListener('click', () => {
+        if (deathModal) {
+          deathModal.classList.add('opacity-0');
+          setTimeout(() => deathModal.classList.add('hidden'), 500);
+        }
+        // Reset states
+        isDead = false;
+        gazeTimer = 0;
+        isLookingAtDuck = false;
+        currentBpm = baseBpm;
+        if (bpmVal) bpmVal.textContent = currentBpm;
+        if (gazeDangerBanner) gazeDangerBanner.classList.add('opacity-0');
+        if (paranoiaTint) paranoiaTint.style.opacity = '0';
+        showToast('CHECKPOINT RESTORED', 'Gaze re-stabilized at 03:17 AM. Remember: Look at the mud, not the carousel.');
+      });
+    }
+
+    // Keyboard Hotkeys: [F] for flashlight, [TAB] for notebook, [ESC] for modals
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFlashlight();
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        toggleNotebook();
+      } else if (e.key === 'Escape') {
+        if (!audioModal.classList.contains('hidden')) {
+          audioModal.classList.add('hidden');
+          audioModal.classList.remove('flex');
+        } else if (!clueDetailModal.classList.contains('hidden')) {
+          clueDetailModal.classList.add('hidden');
+          clueDetailModal.classList.remove('flex');
+        } else if (notebookDrawer.classList.contains('translate-x-0')) {
+          toggleNotebook(false);
+        }
+      }
+    });
+
+  })();
+</script>
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span>
+</body></html>

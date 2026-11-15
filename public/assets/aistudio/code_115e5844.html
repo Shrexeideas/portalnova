@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@100..900&family=Space+Mono:wght@100..900&family=Syne:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}
+::-webkit-scrollbar{display:none;}
+@keyframes pulse-slow{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.animate-rec-blink{animation:pulse-slow 1.6s cubic-bezier(0.4,0,0.6,1) infinite;}
+
+/* Creaking Swing Pendulum Physics */
+@keyframes creak-pendulum-left {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5.5deg); }
+  50% { transform: rotate(-0.5deg); }
+  75% { transform: rotate(-4.2deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes creak-pendulum-right {
+  0% { transform: rotate(-1.5deg); }
+  30% { transform: rotate(-6deg); }
+  65% { transform: rotate(4.8deg); }
+  100% { transform: rotate(-1.5deg); }
+}
+.swing-sway-left {
+  transform-origin: top center;
+  animation: creak-pendulum-left 4.8s ease-in-out infinite;
+}
+.swing-sway-right {
+  transform-origin: top center;
+  animation: creak-pendulum-right 5.6s ease-in-out infinite;
+}
+
+/* Atmospheric Weather: Rain streaks & Streetlight hum flicker */
+@keyframes rainfall {
+  0% { background-position: 0 0; }
+  100% { background-position: 25% 1000px; }
+}
+.rain-layer {
+  background-image: repeating-linear-gradient(105deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1.5px, transparent 2px, transparent 48px);
+  animation: rainfall 0.65s linear infinite;
+}
+@keyframes sodium-flicker {
+  0%, 100% { opacity: 0.88; }
+  22% { opacity: 0.92; }
+  23% { opacity: 0.35; }
+  24% { opacity: 0.85; }
+  72% { opacity: 0.89; }
+  73% { opacity: 0.2; }
+  74% { opacity: 0.75; }
+  75% { opacity: 0.95; }
+  88% { opacity: 0.5; }
+  90% { opacity: 0.88; }
+}
+.light-flicker {
+  animation: sodium-flicker 7s infinite ease-in-out;
+}
+
+/* Jumpscare Glitch & Violent Screen Quake */
+@keyframes scare-shake {
+  0% { transform: translate(0, 0) scale(1.15) rotate(0deg); filter: contrast(280%) invert(0.9) hue-rotate(90deg); }
+  20% { transform: translate(-28px, 18px) scale(1.3) rotate(-2deg); filter: contrast(350%) invert(1) hue-rotate(180deg); }
+  40% { transform: translate(25px, -22px) scale(1.4) rotate(3deg); filter: contrast(400%) invert(0.2) hue-rotate(270deg); }
+  60% { transform: translate(-35px, -15px) scale(1.45) rotate(-3deg); filter: contrast(500%) invert(1) saturate(3); }
+  80% { transform: translate(30px, 25px) scale(1.35) rotate(2deg); filter: contrast(300%) invert(0.8); }
+  100% { transform: translate(0, 0) scale(1.2) rotate(0deg); filter: contrast(200%) invert(0.4); }
+}
+.jumpscare-active {
+  animation: scare-shake 0.12s infinite;
+}
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#690005", "surface-dim": "#121416", "surface-container-high": "#282a2c", "primary": "#ffb4ab", "on-error-container": "#ffdad6", "surface-tint": "#ffb4ab", "secondary-container": "#394b5b", "surface-container": "#1e2022", "surface-container-lowest": "#0c0e10", "error-container": "#93000a", "tertiary-fixed-dim": "#cac6bb", "on-tertiary": "#323129", "on-background": "#e2e2e5", "outline-variant": "#5b403d", "surface-bright": "#38393c", "surface-container-highest": "#333537", "inverse-primary": "#ba181b", "on-secondary-fixed": "#0a1d2b", "tertiary": "#cac6bb", "error": "#ffb4ab", "secondary-fixed": "#d2e5f8", "surface-variant": "#333537", "inverse-on-surface": "#2f3033", "on-primary-fixed-variant": "#93000c", "secondary": "#b6c9dc", "on-tertiary-fixed": "#1d1c15", "tertiary-fixed": "#e6e2d7", "on-primary-fixed": "#410002", "on-primary": "#690006", "on-secondary-fixed-variant": "#374958", "on-secondary-container": "#a8bbcd", "on-tertiary-container": "#dcd8cc", "on-tertiary-fixed-variant": "#49473f", "primary-container": "#ba181b", "primary-fixed-dim": "#ffb4ab", "surface": "#121416", "on-surface-variant": "#e4beb9", "on-surface": "#e2e2e5", "background": "#121416", "tertiary-container": "#605e55", "primary-fixed": "#ffdad6", "surface-container-low": "#1a1c1e", "on-secondary": "#203241", "secondary-fixed-dim": "#b6c9dc", "on-primary-container": "#ffccc6", "inverse-surface": "#e2e2e5", "outline": "#ab8985" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-lg": "1.5rem", "gutter": "1rem", "margin-lg": "3rem", "space-md": "1rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin": "1.25rem", "space-xs": "0.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": ["Syne"], "display-lg": ["Syne"], "body-md": ["Courier Prime"], "body-sm": ["Courier Prime"], "body-lg": ["Courier Prime"], "headline-lg-mobile": ["Syne"], "label-md": ["Space Mono"], "label-lg": ["Space Mono"], "display-lg-mobile": ["Syne"], "label-sm": ["Space Mono"], "headline-sm": ["Syne"], "headline-md": ["Syne"] }, "fontSize": { "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "label-md": ["11px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }], "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.14em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }] } } } };</script></head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen relative selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden select-none">
+<!-- CRT Scanlines & Surveillance Vignette -->
+<div class="pointer-events-none fixed inset-0 z-40 shadow-[inset_0_0_120px_rgba(0,0,0,0.92)]"></div>
+<div class="pointer-events-none fixed inset-0 z-40 opacity-20 mix-blend-overlay" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(226, 226, 229, 0.05) 3px, rgba(226, 226, 229, 0.05) 3px);"></div>
+<!-- TOP HEADER NAVIGATION -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+<div class="h-16 w-full px-gutter-lg flex items-center justify-between gap-gutter">
+<div class="flex items-center gap-space-md">
+<img alt="Playground Files Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrC_9A2v80bA9bsEM1WSMURDZFXiJN248S_FtVh5vwewyZ4IJc9kuhiR9fAsB6cvQVikPqcGzCph6ZTj2nthJ5P75s77Hr7QmNMawzQ_W7pzB6_rdU5-K5suvfjhE4Cwta6KVGq61NN7dX5bnEgC9OE6StqttLsXUzD5SGBLTN0-4esSAHufgV4Y2Eiunxgu2wKPlXsaUoyZMZMuBKJ9Ty8xdplDDfR9lkDxJxyqlcbF"/>
+<div class="hidden sm:flex flex-col">
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wider leading-none">DON'T LOOK AT THE DUCK</span>
+<span class="font-label-sm text-label-sm uppercase text-outline tracking-widest mt-0.5">CASE FILE #89-DUCK / CLASSIFIED / EYES ONLY</span>
+</div>
+</div>
+<nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container">
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="main-menu" href="#main-menu">MAIN MENU</a>
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="case-briefing" href="#case-briefing">CASE BRIEFING</a>
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="gameplay-hud" href="#gameplay-hud">GAMEPLAY HUD</a>
+<button class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" id="nav-open-notebook">INVESTIGATION NOTEBOOK</button>
+<a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer" data-path="pause-and-system" href="#pause-and-system">PAUSE & SYSTEM</a>
+<button class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider bg-error-container text-primary hover:bg-primary hover:text-on-primary transition-all cursor-pointer rounded-xs flex items-center gap-1" id="trigger-test-fail-btn">
+<span class="material-symbols-outlined text-[13px]">skull</span> TEST GAZE COLLAPSE
+      </button>
+</nav>
+<div class="flex items-center gap-space-md">
+<div class="hidden md:flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-md py-1.5 rounded">
+<div class="flex items-center gap-1 text-primary"><span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span><span>REC 00:04:18</span></div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface transition-colors" id="paranoia-freq-display">
+<span class="material-symbols-outlined text-[14px] text-tertiary">graphic_eq</span>
+<span id="paranoia-freq-text">PARANOIA FREQ: 14.2 Hz</span>
+</div>
+<span class="text-outline-variant">|</span>
+<span class="font-label-sm text-label-sm text-outline">42°19'N 71°04'W</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="flex flex-col w-full relative">
+<!-- PRIMARY 3D DIEGETIC PLAYGROUND VIEWPORT CONTAINER -->
+<div class="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-surface-container-lowest cursor-crosshair" id="viewport-container">
+<!-- 3D PARALLAX CAMERA RIG LAYER -->
+<div class="absolute inset-0 w-full h-full will-change-transform transition-transform duration-75 ease-out select-none" id="camera-rig" style="transform-style: preserve-3d;">
+<!-- High-Resolution Atmospheric Backdrop Image (User Provided Asset) -->
+<img alt="Abandoned playground at 2am in torrential mist and rain with rusted swing set, slide, and eerie lone streetlight" class="absolute inset-0 w-full h-full object-cover pointer-events-none scale-105 filter brightness-90 contrast-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoWth56AJz2ydWvcK2Afyma3OrLqlUsDa7b5ggVllvywlbAWBE0FriiAlE_jlTUDOgsO3SSDzop2Io6JPBTIEoUDSRXFoLZ4PM_AHs9wIFmLfvw6glVDIYC9HMOYG1OnJ0XwbPWwjMixeOmb3onRViw5ABa-yK_1wvKjoOCwOyLUln1pDRg2CHvGYdV2Y9Yi8jfeBewCIIrZpCxDcGXdXF7TfzprrFGfLKCndEPZk"/>
+<!-- Dynamic Weather FX: Fog Layers, Rain Streaks & Sodium Streetlight Glow -->
+<div class="absolute inset-0 pointer-events-none rain-layer opacity-45 mix-blend-screen"></div>
+<!-- Volumetric Ground Fog and Sodium Streetlight Corona -->
+<div class="absolute top-[28%] left-[45%] w-72 h-72 rounded-full bg-primary-fixed/15 filter blur-3xl pointer-events-none light-flicker"></div>
+<div class="absolute bottom-0 inset-x-0 h-2/5 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-transparent pointer-events-none"></div>
+<!-- INTERACTIVE FOREGROUND PHYSICAL SWING SET MATRIX -->
+<div class="absolute bottom-6 right-[14%] sm:right-[22%] w-64 md:w-80 h-[480px] pointer-events-auto flex items-start justify-center z-20 group" id="swing-interactive-zone">
+<!-- Physical Swing Dynamic Pendulum Assembly -->
+<div class="relative flex flex-col items-center origin-top transition-transform duration-300 ease-out cursor-pointer" id="dynamic-swing-assembly">
+<!-- Left & Right Iron Chain Links -->
+<div class="flex justify-between w-28 md:w-36 h-80">
+<!-- Left Chain SVG Links -->
+<div class="w-2 h-full flex flex-col items-center space-y-1">
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+</div>
+<!-- Right Chain SVG Links -->
+<div class="w-2 h-full flex flex-col items-center space-y-1">
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-outline-variant/80 rounded-full shadow-sm"></span>
+<span class="w-1.5 h-4 bg-surface-bright/70 rounded-full shadow-sm"></span>
+</div>
+</div>
+<!-- Weathered Rubber Swing Seat -->
+<div class="w-32 md:w-40 h-4 bg-surface-container-high rounded-sm shadow-xl flex items-center justify-center relative">
+<div class="absolute inset-x-2 h-1 bg-surface-dim/90"></div>
+<!-- Diegetic Droplets Dripping -->
+<span class="absolute -bottom-2 left-6 w-1 h-2 bg-secondary/40 rounded-full animate-bounce"></span>
+</div>
+<!-- Contextual Floating Diegetic Push Indicator -->
+<div class="mt-4 px-space-sm py-1 bg-surface-container-lowest/90 backdrop-blur-md rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none flex items-center gap-1.5 text-center">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">[E / CLICK] PUSH SWING (+1.4 m/s)</span>
+</div>
+</div>
+</div>
+<!-- DUST & INTERACTION HOTSPOTS ON PLAYGROUND PROPS -->
+<!-- 1. OXIDIZED METAL SLIDE BASE HOTSPOT -->
+<div class="absolute bottom-[36%] left-[28%] md:left-[35%] w-16 h-16 rounded-full flex items-center justify-center cursor-pointer group z-20" id="hotspot-slide">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest/60 flex items-center justify-center group-hover:bg-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined text-[14px] text-tertiary group-hover:text-on-primary-container transition-colors">search</span>
+</div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-surface-container-lowest/90 px-space-sm py-0.5 rounded shadow opacity-0 group-hover:opacity-100 transition-all font-label-sm text-label-sm uppercase text-secondary">
+          [SLIDE BASE: INFRASOUND DETECTED]
+        </div>
+</div>
+<!-- 2. RUSTED SEESAW PIVOT HOTSPOT -->
+<div class="absolute bottom-[28%] left-[52%] md:left-[56%] w-16 h-16 rounded-full flex items-center justify-center cursor-pointer group z-20" id="hotspot-seesaw">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest/60 flex items-center justify-center group-hover:bg-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined text-[14px] text-tertiary group-hover:text-on-primary-container transition-colors">hardware</span>
+</div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-surface-container-lowest/90 px-space-sm py-0.5 rounded shadow opacity-0 group-hover:opacity-100 transition-all font-label-sm text-label-sm uppercase text-primary">
+          [CENTRAL PIVOT: WEBBED IMPRINTS]
+        </div>
+</div>
+<!-- 3. OVERGROWN CHAIN-LINK FENCE HOTSPOT -->
+<div class="absolute bottom-[44%] left-[10%] md:left-[16%] w-16 h-16 rounded-full flex items-center justify-center cursor-pointer group z-20" id="hotspot-fence">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest/60 flex items-center justify-center group-hover:bg-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined text-[14px] text-tertiary group-hover:text-on-primary-container transition-colors">label</span>
+</div>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-surface-container-lowest/90 px-space-sm py-0.5 rounded shadow opacity-0 group-hover:opacity-100 transition-all font-label-sm text-label-sm uppercase text-tertiary">
+          [FENCE: RECOVER TORN RIBBON]
+        </div>
+</div>
+<!-- 4. GHOST CAROUSEL / SHADOW ENTITY HAZARD ZONE (Do Not Linger Gaze) -->
+<div class="absolute bottom-[26%] left-[4%] md:left-[7%] w-56 h-48 cursor-pointer z-20 flex items-center justify-center group" id="duck-threat-zone">
+<div class="w-44 h-36 rounded-full transition-all duration-300 flex flex-col items-center justify-center" id="duck-aura">
+<span class="material-symbols-outlined text-[28px] text-surface-variant group-hover:text-primary transition-all" id="duck-eye-icon">visibility</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline-variant mt-1 group-hover:text-primary transition-colors">CAROUSEL PERIPHERAL</span>
+</div>
+</div>
+</div>
+<!-- DYNAMIC SURVEILLANCE FLASHLIGHT VOLUMETRIC CONE -->
+<div class="absolute inset-0 pointer-events-none transition-opacity duration-300 z-30" id="flashlight-beam" style="opacity: 0.88; background: radial-gradient(circle 440px at 50% 50%, rgba(225, 235, 245, 0.32) 0%, rgba(186, 24, 27, 0.04) 45%, rgba(12, 14, 16, 0.95) 100%);"></div>
+<!-- PARANOIA PULSING RED TINT LAYER -->
+<div class="absolute inset-0 pointer-events-none bg-primary-container/20 opacity-0 transition-opacity duration-300 z-30 mix-blend-color-burn" id="paranoia-screen-tint"></div>
+<!-- TACTICAL CROSSHAIR / SURVEYOR RETICLE -->
+<div class="pointer-events-none fixed z-40 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 flex flex-col items-center" id="tactical-reticle">
+<div class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150" id="reticle-box">
+<div class="w-1.5 h-1.5 bg-primary rounded-full transition-all" id="reticle-core"></div>
+</div>
+<span class="opacity-0 transition-opacity duration-150 font-label-sm text-label-sm text-primary tracking-widest uppercase mt-1 bg-surface-container-lowest/90 px-1 rounded" id="reticle-label">SCANNING</span>
+</div>
+<!-- ========================================================= -->
+<!-- TOP FORENSIC HUD TELEMETRY BAR                            -->
+<!-- ========================================================= -->
+<div class="absolute top-space-md inset-x-space-md z-40 pointer-events-none flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<!-- Top Left: Temporal & Environmental Telemetry -->
+<div class="pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-xs rounded shadow-lg flex items-center gap-space-md">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-bold" id="env-time-clock">02:14:08 AM</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant">|</span>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-tertiary">thermostat</span>
+<span>38°F // FOG & DRIZZLE</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline-variant hidden md:inline">|</span>
+<div class="hidden md:flex items-center gap-1 font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[13px]">hearing</span>
+<span id="audio-decibel-meter">+18.4 dB</span>
+</div>
+</div>
+<!-- Top Right: Optics, Flashlight & Infrasound Status -->
+<div class="pointer-events-auto flex items-center gap-space-xs">
+<!-- Flashlight Diegetic Trigger -->
+<button class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded shadow-lg flex items-center gap-2 hover:bg-surface-container-high transition-colors" id="flashlight-toggle">
+<span class="material-symbols-outlined text-[15px] text-primary" id="flashlight-icon">flashlight_on</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface">[F] TORCH <span class="text-primary" id="flashlight-state-text">(ON)</span></span>
+<span class="font-label-sm text-label-sm text-outline-variant" id="battery-num">82%</span>
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-300" id="battery-bar" style="width: 82%;"></div>
+</div>
+</button>
+<!-- Ghost Oscillation Trigger Switch -->
+<button class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded shadow-lg flex items-center gap-1.5 hover:bg-surface-container-high transition-colors" id="ghost-oscillation-toggle">
+<span class="material-symbols-outlined text-[14px] text-tertiary" id="ghost-toggle-icon">motion_mode</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hover:text-on-surface">INDUCE GHOST SWAY</span>
+</button>
+<!-- Optics Zoom Toggle -->
+<button class="bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded shadow-lg flex items-center gap-1 hover:bg-surface-container-high transition-colors" id="optic-zoom-btn">
+<span class="material-symbols-outlined text-[14px] text-secondary">zoom_in</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">[Z] ZOOM 2.4X</span>
+</button>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- GAZE DANGER WARNING BANNER (TRIGGERED ON DUCK PROXIMITY)  -->
+<!-- ========================================================= -->
+<div class="absolute top-20 inset-x-0 mx-auto w-fit z-40 opacity-0 transition-opacity duration-150 pointer-events-none flex flex-col items-center" id="gaze-danger-banner">
+<div class="bg-primary-container px-space-md py-1 rounded-sm shadow-2xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-on-primary-container text-[18px] animate-bounce">warning</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-primary-container tracking-widest font-bold">WARNING: DIRECT GAZE DETECTED</span>
+</div>
+<div class="mt-1 w-64 h-2 bg-surface-container-lowest rounded-full overflow-hidden shadow">
+<div class="h-full bg-error transition-all duration-75" id="gaze-meter-fill" style="width: 0%;"></div>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary mt-1" id="gaze-danger-counter">DANGER GAZE EXPOSURE: 0.0s / 1.4s FATAL</span>
+</div>
+<!-- ========================================================= -->
+<!-- BOTTOM LEFT: CARDIAC & SANITY METRICS                     -->
+<!-- ========================================================= -->
+<div class="absolute bottom-space-md left-space-md z-40 pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-md p-space-sm rounded shadow-xl flex flex-col gap-1 w-64">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">ecg_heart</span>
+<span class="uppercase">AGENT COMPOSURE</span>
+</div>
+<span class="text-primary font-bold" id="paranoia-level-label">STABLE</span>
+</div>
+<!-- Real-Time Heart Rate Pulse Indicator -->
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface leading-none" id="bpm-val">88</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">BPM // ADRENALIN</span>
+</div>
+<!-- Animated EKG Pulse Line SVG Chart -->
+<div class="w-full h-8 overflow-hidden relative">
+<svg class="w-full h-full stroke-primary fill-none" preserveaspectratio="none" viewbox="0 0 200 40">
+<path class="animate-pulse" d="M0,20 L30,20 L40,8 L48,32 L56,12 L64,28 L72,20 L130,20 L140,4 L148,36 L156,10 L164,30 L172,20 L200,20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-center justify-between text-outline-variant font-label-sm text-label-sm pt-0.5">
+<span>VAGAL TENSION: NOMINAL</span>
+<span>EEG: 13.8 Hz</span>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- BOTTOM RIGHT: PHYSICAL SWING ACCELEROMETER TELEMETRY       -->
+<!-- ========================================================= -->
+<div class="absolute bottom-space-md right-space-md z-40 pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-md p-space-sm rounded shadow-xl flex flex-col gap-2 w-72">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">analytics</span>
+<span class="uppercase">SWING ACCELEROMETER MATRIX</span>
+</div>
+<span class="text-secondary font-bold" id="swing-state-label">IDLE OSCILLATION</span>
+</div>
+<!-- Telemetry Data Grid -->
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="bg-surface-container-low p-1 rounded">
+<span class="font-label-sm text-label-sm text-outline block">ARC ANGLE</span>
+<span class="font-label-md text-label-md text-on-surface font-bold" id="telemetry-angle">0.8°</span>
+</div>
+<div class="bg-surface-container-low p-1 rounded">
+<span class="font-label-sm text-label-sm text-outline block">VELOCITY</span>
+<span class="font-label-md text-label-md text-primary font-bold" id="telemetry-velocity">0.2 m/s</span>
+</div>
+<div class="bg-surface-container-low p-1 rounded">
+<span class="font-label-sm text-label-sm text-outline block">TENSION</span>
+<span class="font-label-md text-label-md text-tertiary font-bold" id="telemetry-tension">142 N</span>
+</div>
+</div>
+<!-- Decay Curve Progress Bar -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline-variant">
+<span>HARMONIC DECAY</span>
+<span id="telemetry-decay-pct">94%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-300" id="telemetry-decay-bar" style="width: 94%;"></div>
+</div>
+</div>
+<!-- Quick Interactive Push Swing Button -->
+<button class="w-full py-1.5 bg-surface-container hover:bg-surface-container-high rounded text-on-surface font-label-sm text-label-sm uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all" id="manual-push-swing-btn">
+<span class="material-symbols-outlined text-[14px] text-primary">cached</span>
+<span>[CLICK] IMPART SWING FORCE</span>
+</button>
+</div>
+<!-- ========================================================= -->
+<!-- MOBILE / TABLET VIRTUAL TOUCH CONTROLS (RESPONSIVE)       -->
+<!-- ========================================================= -->
+<div class="md:hidden absolute bottom-24 inset-x-space-md z-40 pointer-events-none flex items-center justify-between">
+<!-- Virtual Directional Pan Pad -->
+<div class="pointer-events-auto w-24 h-24 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center shadow-2xl relative">
+<div class="w-10 h-10 rounded-full bg-surface-container-high shadow-inner flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-surface">pan_tool</span>
+</div>
+<span class="absolute top-1 font-label-sm text-label-sm text-outline">LOOK</span>
+</div>
+<!-- Virtual Quick Action Buttons -->
+<div class="pointer-events-auto flex flex-col gap-space-xs">
+<button class="w-14 h-14 rounded-full bg-primary-container text-on-primary-container shadow-2xl flex items-center justify-center active:scale-95 transition-transform" id="mobile-push-btn">
+<span class="material-symbols-outlined text-[20px]">sports_gymnastics</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-surface-container-lowest/90 text-primary shadow-2xl flex items-center justify-center active:scale-95 transition-transform" id="mobile-torch-btn">
+<span class="material-symbols-outlined text-[20px]">flashlight_on</span>
+</button>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- VIOLENT JUMPSCARE OVERLAY CANVAS                          -->
+<!-- ========================================================= -->
+<div class="absolute inset-0 pointer-events-none z-50 opacity-0 transition-opacity duration-75 flex items-center justify-center bg-black overflow-hidden" id="jumpscare-overlay">
+<div class="absolute inset-0 bg-primary/20 mix-blend-color-dodge jumpscare-active"></div>
+<img alt="Gaze Collapse Anomaly Entity" class="w-[580px] h-[580px] object-contain jumpscare-active filter invert hue-rotate-180 drop-shadow-[0_0_60px_#ba181b]" src="https://lh3.googleusercontent.com/aida/ALJJyrC_9A2v80bA9bsEM1WSMURDZFXiJN248S_FtVh5vwewyZ4IJc9kuhiR9fAsB6cvQVikPqcGzCph6ZTj2nthJ5P75s77Hr7QmNMawzQ_W7pzB6_rdU5-K5suvfjhE4Cwta6KVGq61NN7dX5bnEgC9OE6StqttLsXUzD5SGBLTN0-4esSAHufgV4Y2Eiunxgu2wKPlXsaUoyZMZMuBKJ9Ty8xdplDDfR9lkDxJxyqlcbF"/>
+</div>
+<!-- ========================================================= -->
+<!-- COGNITIVE COLLAPSE TERMINAL DEATH MODAL                   -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300 bg-surface-container-lowest/95 backdrop-blur-xl flex items-center justify-center p-gutter" id="death-modal">
+<div class="w-full max-w-lg bg-surface-container-low p-space-xl rounded shadow-2xl flex flex-col items-center text-center gap-space-md">
+<span class="material-symbols-outlined text-[54px] text-primary">warning</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-lg text-headline-lg uppercase text-primary font-bold">COGNITIVE LOCKDOWN COLLAPSE</span>
+<span class="font-label-sm text-label-sm uppercase text-outline tracking-widest">FATAL PROTOCOL VIOLATION // DIRECT OPTIC REGISTRATION</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Agent-Archivist #412 maintained continuous focal orientation upon the anomaly for more than 1.4 seconds. Neural telemetry ceased transmission at 02:14:09 AM.
+        </p>
+<button class="mt-space-sm px-space-xl py-space-sm bg-primary-container hover:bg-inverse-primary text-on-primary-container font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all shadow-lg flex items-center gap-2" id="respawn-btn">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span>RE-STABILIZE AT LAST CHECKPOINT (02:14 AM)</span>
+</button>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- FORENSIC EVIDENCE DETAIL POPUP MODAL                      -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-surface-container-lowest/80 backdrop-blur-md p-gutter" id="clue-detail-modal">
+<div class="w-full max-w-md bg-surface-container-low p-space-lg rounded shadow-2xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface" id="clue-modal-title">EVIDENCE ARTIFACT</span>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors" id="close-clue-detail">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-2">
+<div class="w-full h-32 bg-cover bg-center rounded" data-alt="Close up archival polaroid macro photograph of oxidized swing set chain links with scratched occult numeric carvings under dim flash illumination, low-fi 1980s grain" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIIHdYxoEjwVS5JedsmDQ_633u6Nf4eBsnvIMzs1cOpFtI-4VZ6Zo96hOKcPF2nuru0fQBDNR4OPTtX3gKUNkbtG7Ob1y9T7FJqapIN9hwn_UNdfzNEPVuiZfpjujBZvV4PgE8kRcy3D7PceDKbZ62erwq54N4_NTtMPbjMEsOq15i5am7rPZytBld_cREc8c0ChdqNA-zy7wcR_JzI_nO0OUOPY2JRbbaenTxhsQ')"></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="clue-modal-desc">
+            Surface tension inspection indicates the chain link has endured stress far exceeding human weight. Lateral striations suggest an unnatural magnetic pull towards the perimeter tree line.
+          </p>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-1.5 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider rounded hover:bg-inverse-primary transition-colors" id="store-clue-ack">
+            LOG INTO INVESTIGATION DOSSIER
+          </button>
+</div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- AUDIO RECORDER PLAYER MODAL                               -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-surface-container-lowest/80 backdrop-blur-md p-gutter" id="audio-modal">
+<div class="w-full max-w-md bg-surface-container-low p-space-lg rounded shadow-2xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">mobile_share_stack</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">MICROCASSETTE 04: TRANSCRIPT</span>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors" id="close-audio-modal">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-md bg-surface-container rounded flex flex-col gap-2 font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center justify-between text-outline-variant font-label-sm text-label-sm">
+<span>TAPE SPEED: 1.2 cm/s</span>
+<span>RECOVERED: JULIAN K.</span>
+</div>
+<p class="italic text-on-surface-variant">
+            "[Heavy rain hitting plastic tarp]... It sits on the middle swing when the rain turns to sleet. You can hear the hinges screeching first. If you hear it, look down at your boots. Don't look at the yellow beak... Don't..."
+          </p>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-1.5 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider rounded hover:bg-inverse-primary transition-colors" id="audio-modal-ack">
+            ARCHIVE PLAYBACK
+          </button>
+</div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- SLIDING INVESTIGATION NOTEBOOK DRAWER                     -->
+<!-- ========================================================= -->
+<div class="fixed top-16 right-0 w-full sm:w-96 h-[calc(100vh-4rem)] bg-surface-container-low shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" id="notebook-drawer">
+<div class="p-space-md bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">menu_book</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface">CASE NOTEBOOK [TAB]</span>
+</div>
+<button class="text-outline hover:text-on-surface" id="close-notebook-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-md flex-1 overflow-y-auto space-y-space-md">
+<!-- Entry 1 -->
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-primary uppercase">MUD TRACKS #01</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Webbed footprint depth exceeds 4 inches. Entity walked from the pond towards the swing set at 01:52 AM.
+          </p>
+</div>
+<!-- Entry 2 -->
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase">SWING HARMONICS #02</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Left swing continuously oscillates at 0.18 Hz without atmospheric wind velocity. Mechanical damping coefficient is abnormal.
+          </p>
+</div>
+<!-- Entry 3 -->
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-tertiary uppercase">RULE OF ENGAGEMENT #03</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            DO NOT DIRECTLY OBSERVE CAROUSEL CENTER. Peripheral glance tolerance: < 1.4 seconds.
+          </p>
+</div>
+</div>
+</div>
+<!-- DIEGETIC NOTIFICATION TOAST -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 opacity-0 translate-y-4 transition-all duration-300 pointer-events-none bg-surface-container-lowest/95 px-space-md py-space-xs rounded shadow-2xl flex items-center gap-space-sm" id="diegetic-toast">
+<span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary" id="toast-subtitle">FIELD OBSERVATION</span>
+<span class="font-body-sm text-body-sm text-on-surface" id="toast-body">Interaction logged in dossier.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- PENDULUM DYNAMICS & REALISTIC SWING INTERACTION ENGINE   -->
+<!-- ========================================================= -->
+<script>
+  (function initPlaygroundSwingPhysics() {
+    // DOM Elements
+    const swingInteractiveZone = document.getElementById('swing-interactive-zone');
+    const dynamicSwingAssembly = document.getElementById('dynamic-swing-assembly');
+    const ghostToggleBtn = document.getElementById('ghost-oscillation-toggle');
+    const ghostToggleIcon = document.getElementById('ghost-toggle-icon');
+    const manualPushBtn = document.getElementById('manual-push-swing-btn');
+    const mobilePushBtn = document.getElementById('mobile-push-btn');
+    const opticZoomBtn = document.getElementById('optic-zoom-btn');
+    const cameraRig = document.getElementById('camera-rig');
+    const telemetryAngle = document.getElementById('telemetry-angle');
+    const telemetryVelocity = document.getElementById('telemetry-velocity');
+    const telemetryTension = document.getElementById('telemetry-tension');
+    const telemetryDecayBar = document.getElementById('telemetry-decay-bar');
+    const telemetryDecayPct = document.getElementById('telemetry-decay-pct');
+    const swingStateLabel = document.getElementById('swing-state-label');
+    const audioDecibelMeter = document.getElementById('audio-decibel-meter');
+    const envTimeClock = document.getElementById('env-time-clock');
+
+    // Swing Physics Variables
+    let angle = 0.5; // current oscillation angle in degrees
+    let angularVelocity = 0.0; // in deg/frame
+    let amplitude = 2.4; // peak degrees
+    let time = 0;
+    let isGhostSwayActive = false;
+    let isZoomed = false;
+    let pushImpulse = 0;
+
+    // Hotspots Popups
+    const hotspotSlide = document.getElementById('hotspot-slide');
+    const hotspotSeesaw = document.getElementById('hotspot-seesaw');
+    const hotspotFence = document.getElementById('hotspot-fence');
+    const clueDetailModal = document.getElementById('clue-detail-modal');
+    const clueModalTitle = document.getElementById('clue-modal-title');
+    const clueModalDesc = document.getElementById('clue-modal-desc');
+
+    // Function to apply physical swing push
+    function pushSwing(forceMultiplier = 1) {
+      amplitude = Math.min(24, amplitude + (6.5 * forceMultiplier));
+      pushImpulse = 4.2 * forceMultiplier;
+      if (swingStateLabel) swingStateLabel.textContent = 'HIGH ACCELERATION';
+      if (audioDecibelMeter) audioDecibelMeter.textContent = `+${(24 + amplitude).toFixed(1)} dB`;
+    }
+
+    if (swingInteractiveZone) {
+      swingInteractiveZone.addEventListener('click', () => pushSwing(1));
+    }
+    if (manualPushBtn) {
+      manualPushBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        pushSwing(1.2);
+      });
+    }
+    if (mobilePushBtn) {
+      mobilePushBtn.addEventListener('click', () => pushSwing(1.5));
+    }
+
+    // Toggle Ghost Oscillation
+    if (ghostToggleBtn) {
+      ghostToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isGhostSwayActive = !isGhostSwayActive;
+        if (isGhostSwayActive) {
+          ghostToggleBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+          ghostToggleIcon.textContent = 'stream';
+          if (swingStateLabel) swingStateLabel.textContent = 'GHOST RESONANCE';
+        } else {
+          ghostToggleBtn.classList.remove('bg-primary-container', 'text-on-primary-container');
+          ghostToggleIcon.textContent = 'motion_mode';
+          if (swingStateLabel) swingStateLabel.textContent = 'DAMPING IDLE';
+        }
+      });
+    }
+
+    // Zoom Optics Calibration
+    if (opticZoomBtn) {
+      opticZoomBtn.addEventListener('click', () => {
+        isZoomed = !isZoomed;
+        if (isZoomed) {
+          opticZoomBtn.classList.add('bg-secondary', 'text-on-secondary');
+          if (cameraRig) cameraRig.style.scale = '1.65';
+        } else {
+          opticZoomBtn.classList.remove('bg-secondary', 'text-on-secondary');
+          if (cameraRig) cameraRig.style.scale = '1.12';
+        }
+      });
+    }
+
+    // Hotspot Click handlers
+    function openClue(title, desc) {
+      if (!clueDetailModal) return;
+      if (clueModalTitle) clueModalTitle.textContent = title;
+      if (clueModalDesc) clueModalDesc.textContent = desc;
+      clueDetailModal.classList.remove('hidden');
+      clueDetailModal.classList.add('flex');
+    }
+
+    if (hotspotSlide) {
+      hotspotSlide.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openClue('OXIDIZED SLIDE BASE: INFRASOUND LOG', 'Microphone pickup captures an ambient pulse at 13.8 Hz vibrating the hollow steel chassis. Resonance correlates with entity proximity.');
+      });
+    }
+
+    if (hotspotSeesaw) {
+      hotspotSeesaw.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openClue('SEESAW FULCRUM: SUBTERRANEAN SINKAGE', 'Central fulcrum bolt has sheer marks. Webbed greasy prints indicate an entity was counterweighting the empty beam.');
+      });
+    }
+
+    if (hotspotFence) {
+      hotspotFence.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openClue('BOUNDARY FENCE: YELLOW FABRIC FRAGMENT', 'A torn yellow synthetic ribbon caught on barbed wire. Forensic residue reveals traces of sulfur and lake silt.');
+      });
+    }
+
+    // Physical Pendulum Harmonic Simulation Loop
+    function simulatePendulum() {
+      time += 0.045;
+
+      // In ghost mode, maintain a rhythmic 7-degree sway continuously
+      if (isGhostSwayActive) {
+        amplitude = Math.max(7.5, amplitude);
+      } else {
+        // Natural dampening decay
+        amplitude = Math.max(0.6, amplitude * 0.993);
+      }
+
+      // Harmonic sine wave oscillation
+      angle = Math.sin(time * 2.8) * amplitude;
+      const currentVelocity = Math.abs(Math.cos(time * 2.8) * (amplitude * 0.12));
+      const tension = 135 + (Math.abs(angle) * 3.5);
+
+      // Apply transform to the swing assembly
+      if (dynamicSwingAssembly) {
+        dynamicSwingAssembly.style.transform = `rotate(${angle.toFixed(2)}deg)`;
+      }
+
+      // Update Telemetry Display
+      if (telemetryAngle) telemetryAngle.textContent = `${Math.abs(angle).toFixed(1)}°`;
+      if (telemetryVelocity) telemetryVelocity.textContent = `${currentVelocity.toFixed(2)} m/s`;
+      if (telemetryTension) telemetryTension.textContent = `${tension.toFixed(0)} N`;
+
+      const decayRatio = Math.max(5, Math.min(100, (amplitude / 24) * 100));
+      if (telemetryDecayBar) telemetryDecayBar.style.width = `${decayRatio}%`;
+      if (telemetryDecayPct) telemetryDecayPct.textContent = `${decayRatio.toFixed(0)}%`;
+
+      requestAnimationFrame(simulatePendulum);
+    }
+    requestAnimationFrame(simulatePendulum);
+
+    // Live clock update for forensic precision
+    setInterval(() => {
+      const now = new Date();
+      const s = String(now.getSeconds()).padStart(2, '0');
+      if (envTimeClock) envTimeClock.textContent = `02:14:${s} AM`;
+    }, 1000);
+
+  })();
+</script></main>
+<footer class="w-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)] py-space-md">
+<div class="w-full px-gutter-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink"></span>
+<span>SURVEILLANCE NODE: OAK-PARK-FEED-07</span>
+<span>//</span>
+<span>TERMINAL AUTH: AGENT-ARCHIVIST #412</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant text-center">
+      © 1989 FEDERAL BEHAVIORAL ANOMALY REPOSITORY. UNAUTHORIZED DISCLOSURE IS PUNISHABLE BY PERMANENT QUARANTINE.
+    </div>
+<div class="font-label-sm text-label-sm text-primary tracking-widest uppercase">
+      DO NOT MAINTAIN DIRECT EYE CONTACT
+    </div>
+</div>
+</footer>
+<!-- ========================================================= -->
+<!-- COMPLETE GAME ENGINE & IMMERSIVE AUDIO / GAZE LOGIC       -->
+<!-- ========================================================= -->
+<script>
+  (function initPlaygroundHorrorEngine() {
+    // DOM Elements
+    const viewport = document.getElementById('viewport-container');
+    const cameraRig = document.getElementById('camera-rig');
+    const flashlightBeam = document.getElementById('flashlight-beam');
+    const tacticalReticle = document.getElementById('tactical-reticle');
+    const reticleBox = document.getElementById('reticle-box');
+    const reticleCore = document.getElementById('reticle-core');
+    const reticleLabel = document.getElementById('reticle-label');
+    const flashlightToggle = document.getElementById('flashlight-toggle');
+    const flashlightIcon = document.getElementById('flashlight-icon');
+    const flashlightStateText = document.getElementById('flashlight-state-text');
+    const batteryNum = document.getElementById('battery-num');
+    const batteryBar = document.getElementById('battery-bar');
+    const bpmVal = document.getElementById('bpm-val');
+    const paranoiaLabel = document.getElementById('paranoia-level-label');
+    const paranoiaTint = document.getElementById('paranoia-screen-tint');
+    const duckZone = document.getElementById('duck-threat-zone');
+    const duckAura = document.getElementById('duck-aura');
+    const duckEyeIcon = document.getElementById('duck-eye-icon');
+    const gazeDangerBanner = document.getElementById('gaze-danger-banner');
+    const gazeMeterFill = document.getElementById('gaze-meter-fill');
+    const gazeDangerCounter = document.getElementById('gaze-danger-counter');
+    const jumpscareOverlay = document.getElementById('jumpscare-overlay');
+    const deathModal = document.getElementById('death-modal');
+    const respawnBtn = document.getElementById('respawn-btn');
+    const triggerTestFailBtn = document.getElementById('trigger-test-fail-btn');
+    const directJumpscareTrigger = document.getElementById('direct-jumpscare-trigger');
+    const notebookDrawer = document.getElementById('notebook-drawer');
+    const openNotebookBtn = document.getElementById('open-notebook-btn');
+    const navOpenNotebook = document.getElementById('nav-open-notebook');
+    const closeNotebookBtn = document.getElementById('close-notebook-btn');
+    const audioModal = document.getElementById('audio-modal');
+    const closeAudioModal = document.getElementById('close-audio-modal');
+    const audioModalAck = document.getElementById('audio-modal-ack');
+    const toast = document.getElementById('diegetic-toast');
+    const toastBody = document.getElementById('toast-body');
+    const toastSubtitle = document.getElementById('toast-subtitle');
+    const clueDetailModal = document.getElementById('clue-detail-modal');
+    const closeClueDetail = document.getElementById('close-clue-detail');
+    const storeClueAck = document.getElementById('store-clue-ack');
+
+    // Interactive Hotspots
+    const hotspotSwings = document.getElementById('hotspot-swings');
+    const hotspotMud = document.getElementById('hotspot-mud');
+    const hotspotRecorder = document.getElementById('hotspot-recorder');
+
+    // Game State
+    let flashlightOn = true;
+    let batteryLevel = 74;
+    let baseBpm = 92;
+    let currentBpm = 92;
+    let isLookingAtDuck = false;
+    let gazeTimer = 0; // in seconds
+    const GAZE_FATAL_LIMIT = 1.4; // seconds of continuous gaze triggers fatal jumpscare
+    let isDead = false;
+    let cluesFound = 5;
+
+    // Mouse coordinates & Smooth LERP
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentCamX = 0;
+    let currentCamY = 0;
+    let currentRotX = 0;
+    let currentRotY = 0;
+
+    // Show Diegetic Toast Notification
+    function showToast(title, message) {
+      if (!toast) return;
+      toastSubtitle.textContent = title;
+      toastBody.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 3500);
+    }
+
+    // 1. Mouse Tracking & 3D Perspective FPS Movement
+    if (viewport) {
+      viewport.addEventListener('mousemove', (e) => {
+        if (isDead) return;
+        const rect = viewport.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+
+        // Position crosshair
+        if (tacticalReticle) {
+          tacticalReticle.style.left = `${e.clientX}px`;
+          tacticalReticle.style.top = `${e.clientY}px`;
+        }
+
+        // Update Flashlight beam position
+        if (flashlightBeam && flashlightOn) {
+          flashlightBeam.style.background = `radial-gradient(circle 420px at ${mouseX}px ${mouseY}px, rgba(225, 235, 245, 0.32) 0%, rgba(186, 24, 27, 0.05) 45%, rgba(0, 0, 0, 0.94) 100%)`;
+        }
+      });
+    }
+
+    // Render loop for smooth camera lerp (First Person Body Cam Feel)
+    function renderCameraLoop() {
+      if (!isDead && viewport && cameraRig) {
+        const rect = viewport.getBoundingClientRect();
+        const normX = (mouseX / rect.width) - 0.5; // -0.5 to 0.5
+        const normY = (mouseY / rect.height) - 0.5;
+
+        // Target translations and rotations
+        const targetTranslateX = normX * -55;
+        const targetTranslateY = normY * -35;
+        const targetRotY = normX * 9.5; // camera pans left/right
+        const targetRotX = normY * -7.5; // camera tilts up/down
+
+        // Lerp interpolation
+        currentCamX += (targetTranslateX - currentCamX) * 0.08;
+        currentCamY += (targetTranslateY - currentCamY) * 0.08;
+        currentRotX += (targetRotX - currentRotX) * 0.08;
+        currentRotY += (targetRotY - currentRotY) * 0.08;
+
+        cameraRig.style.transform = `scale(1.12) translate3d(${currentCamX}px, ${currentCamY}px, 0) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+      }
+      requestAnimationFrame(renderCameraLoop);
+    }
+    requestAnimationFrame(renderCameraLoop);
+
+    // 2. Flashlight Toggle System
+    function toggleFlashlight() {
+      flashlightOn = !flashlightOn;
+      if (flashlightBeam) {
+        flashlightBeam.style.opacity = flashlightOn ? '0.9' : '0.04';
+      }
+      if (flashlightIcon) {
+        flashlightIcon.textContent = flashlightOn ? 'flashlight_on' : 'flashlight_off';
+      }
+      if (flashlightStateText) {
+        flashlightStateText.textContent = flashlightOn ? '(ON)' : '(OFF)';
+      }
+      showToast('SURVEILLANCE GEAR', flashlightOn ? 'Flashlight toggled [ACTIVE]' : 'Flashlight [POWER SAVING // OFF]');
+    }
+
+    if (flashlightToggle) {
+      flashlightToggle.addEventListener('click', toggleFlashlight);
+    }
+
+    // Slow Battery Drain & Entity Proximity Flicker
+    setInterval(() => {
+      if (flashlightOn && batteryLevel > 15) {
+        batteryLevel -= 1;
+        if (batteryNum) batteryNum.textContent = `${batteryLevel}%`;
+        if (batteryBar) batteryBar.style.width = `${batteryLevel}%`;
+      }
+      // Occasional entity interference flicker if looking near carousel
+      if (isLookingAtDuck && flashlightOn && flashlightBeam) {
+        flashlightBeam.style.opacity = (Math.random() > 0.4) ? '0.2' : '0.9';
+      }
+    }, 4500);
+
+    // 3. Notebook Drawer Slider
+    function toggleNotebook(forceState) {
+      const isOpen = notebookDrawer.classList.contains('translate-x-0');
+      const shouldOpen = forceState !== undefined ? forceState : !isOpen;
+      if (shouldOpen) {
+        notebookDrawer.classList.remove('translate-x-full');
+        notebookDrawer.classList.add('translate-x-0');
+      } else {
+        notebookDrawer.classList.add('translate-x-full');
+        notebookDrawer.classList.remove('translate-x-0');
+      }
+    }
+    if (openNotebookBtn) openNotebookBtn.addEventListener('click', () => toggleNotebook(true));
+    if (navOpenNotebook) navOpenNotebook.addEventListener('click', () => toggleNotebook(true));
+    if (closeNotebookBtn) closeNotebookBtn.addEventListener('click', () => toggleNotebook(false));
+
+    // 4. Hotspot Interactions
+    function setupHotspot(el, targetName, onClick) {
+      if (!el) return;
+      el.addEventListener('mouseenter', () => {
+        if (reticleBox) {
+          reticleBox.classList.add('scale-125', 'border-primary');
+        }
+        if (reticleCore) {
+          reticleCore.classList.add('bg-error', 'animate-ping');
+        }
+        if (reticleLabel) {
+          reticleLabel.textContent = targetName;
+          reticleLabel.classList.remove('opacity-0');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        if (reticleBox) {
+          reticleBox.classList.remove('scale-125', 'border-primary');
+        }
+        if (reticleCore) {
+          reticleCore.classList.remove('bg-error', 'animate-ping');
+        }
+        if (reticleLabel) {
+          reticleLabel.classList.add('opacity-0');
+        }
+      });
+      el.addEventListener('click', onClick);
+    }
+
+    // Swing set inspection
+    setupHotspot(hotspotSwings, 'RUSTED SWING #2', () => {
+      if (clueDetailModal) clueDetailModal.classList.remove('hidden');
+      clueDetailModal.classList.add('flex');
+    });
+
+    if (closeClueDetail) closeClueDetail.addEventListener('click', () => {
+      clueDetailModal.classList.add('hidden');
+      clueDetailModal.classList.remove('flex');
+    });
+    if (storeClueAck) storeClueAck.addEventListener('click', () => {
+      clueDetailModal.classList.add('hidden');
+      clueDetailModal.classList.remove('flex');
+      showToast('EVIDENCE LOGGED', 'Fragment preserved in dossier. Swing chain tension cataloged.');
+    });
+
+    // Muddy footprints examination
+    setupHotspot(hotspotMud, 'WEBBED ANOMALY TRACKS', () => {
+      showToast('FORENSIC SCAN', 'Subsurface impression depth indicates entity weight exceeds 420 lbs.');
+      currentBpm = Math.min(130, currentBpm + 14);
+      if (bpmVal) bpmVal.textContent = currentBpm;
+    });
+
+    // Audio recorder player
+    setupHotspot(hotspotRecorder, 'JULIAN\'S TAPE RECORDER', () => {
+      if (audioModal) {
+        audioModal.classList.remove('hidden');
+        audioModal.classList.add('flex');
+      }
+    });
+
+    if (closeAudioModal) closeAudioModal.addEventListener('click', () => {
+      audioModal.classList.add('hidden');
+      audioModal.classList.remove('flex');
+    });
+    if (audioModalAck) audioModalAck.addEventListener('click', () => {
+      audioModal.classList.add('hidden');
+      audioModal.classList.remove('flex');
+      showToast('TAPE CATALOGED', 'Reel 04 transcription added to investigation notebook.');
+    });
+
+    // 5. "DON'T LOOK AT THE DUCK" Gaze Danger & Terrifying Jumpscare Loss Sequence
+    if (duckZone) {
+      duckZone.addEventListener('mouseenter', () => {
+        isLookingAtDuck = true;
+        if (duckAura) duckAura.classList.add('border-error/80', 'bg-error-container/20');
+        if (duckEyeIcon) duckEyeIcon.classList.add('text-error', 'animate-pulse');
+        if (reticleLabel) {
+          reticleLabel.textContent = 'GAZE HAZARD // TURN AWAY';
+          reticleLabel.classList.remove('opacity-0');
+        }
+      });
+
+      duckZone.addEventListener('mouseleave', () => {
+        isLookingAtDuck = false;
+        if (duckAura) duckAura.classList.remove('border-error/80', 'bg-error-container/20');
+        if (duckEyeIcon) duckEyeIcon.classList.remove('text-error', 'animate-pulse');
+        if (reticleLabel) reticleLabel.classList.add('opacity-0');
+      });
+    }
+
+    // High frequency heartbeat / gaze exposure loop
+    setInterval(() => {
+      if (isDead) return;
+
+      if (isLookingAtDuck) {
+        gazeTimer += 0.1;
+        // Heart rate jumps drastically
+        currentBpm = Math.min(176, currentBpm + 8);
+        if (paranoiaTint) paranoiaTint.style.opacity = Math.min(0.9, gazeTimer / 1.1);
+        if (gazeDangerBanner) gazeDangerBanner.classList.remove('opacity-0');
+
+        // Progress bar fill
+        const ratio = Math.min(1, gazeTimer / GAZE_FATAL_LIMIT);
+        if (gazeMeterFill) gazeMeterFill.style.width = `${ratio * 100}%`;
+        if (gazeDangerCounter) gazeDangerCounter.textContent = `DANGER GAZE EXPOSURE: ${gazeTimer.toFixed(1)}s / ${GAZE_FATAL_LIMIT}s FATAL`;
+
+        if (paranoiaLabel) paranoiaLabel.textContent = 'CRITICAL // LOCK';
+
+        // FATAL TRIGGER: Exceeded 1.4 seconds of direct gaze
+        if (gazeTimer >= GAZE_FATAL_LIMIT) {
+          triggerJumpscareSequence();
+        }
+      } else {
+        // Looking away: cooldown and relax heart rate
+        if (gazeTimer > 0) {
+          gazeTimer = Math.max(0, gazeTimer - 0.25);
+          const ratio = Math.min(1, gazeTimer / GAZE_FATAL_LIMIT);
+          if (gazeMeterFill) gazeMeterFill.style.width = `${ratio * 100}%`;
+          if (gazeDangerCounter) gazeDangerCounter.textContent = `DANGER GAZE EXPOSURE: ${gazeTimer.toFixed(1)}s / ${GAZE_FATAL_LIMIT}s FATAL`;
+          if (gazeTimer === 0 && gazeDangerBanner) {
+            gazeDangerBanner.classList.add('opacity-0');
+          }
+        }
+        if (paranoiaTint) paranoiaTint.style.opacity = '0';
+        if (currentBpm > baseBpm) {
+          currentBpm = Math.max(baseBpm, currentBpm - 3);
+        }
+        if (paranoiaLabel) {
+          paranoiaLabel.textContent = currentBpm > 115 ? 'ELEVATED' : 'STABLE';
+        }
+      }
+
+      if (bpmVal) bpmVal.textContent = currentBpm;
+    }, 100);
+
+    // TRIGGER FULL VISCERAL JUMPSCARE & LOSS STATE
+    function triggerJumpscareSequence() {
+      if (isDead) return;
+      isDead = true;
+
+      // 1. Instantly trigger violent screeching visual jumpscare
+      if (jumpscareOverlay) {
+        jumpscareOverlay.classList.remove('opacity-0');
+        jumpscareOverlay.classList.add('opacity-100');
+      }
+
+      // 2. Play intense visual shutter / lens crack / color flash for 1.8 seconds
+      setTimeout(() => {
+        if (jumpscareOverlay) {
+          jumpscareOverlay.classList.add('opacity-0');
+          jumpscareOverlay.classList.remove('opacity-100');
+        }
+        // 3. Reveal Cognitive Collapse Terminal Loss Overlay
+        if (deathModal) {
+          deathModal.classList.remove('hidden');
+          setTimeout(() => deathModal.classList.remove('opacity-0'), 20);
+        }
+      }, 1600);
+    }
+
+    // Direct Test Scare Buttons
+    if (triggerTestFailBtn) triggerTestFailBtn.addEventListener('click', triggerJumpscareSequence);
+    if (directJumpscareTrigger) directJumpscareTrigger.addEventListener('click', triggerJumpscareSequence);
+
+    // Respawn / Wake up checkpoint
+    if (respawnBtn) {
+      respawnBtn.addEventListener('click', () => {
+        if (deathModal) {
+          deathModal.classList.add('opacity-0');
+          setTimeout(() => deathModal.classList.add('hidden'), 500);
+        }
+        // Reset states
+        isDead = false;
+        gazeTimer = 0;
+        isLookingAtDuck = false;
+        currentBpm = baseBpm;
+        if (bpmVal) bpmVal.textContent = currentBpm;
+        if (gazeDangerBanner) gazeDangerBanner.classList.add('opacity-0');
+        if (paranoiaTint) paranoiaTint.style.opacity = '0';
+        showToast('CHECKPOINT RESTORED', 'Gaze re-stabilized at 03:17 AM. Remember: Look at the mud, not the carousel.');
+      });
+    }
+
+    // Keyboard Hotkeys: [F] for flashlight, [TAB] for notebook, [ESC] for modals
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFlashlight();
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        toggleNotebook();
+      } else if (e.key === 'Escape') {
+        if (!audioModal.classList.contains('hidden')) {
+          audioModal.classList.add('hidden');
+          audioModal.classList.remove('flex');
+        } else if (!clueDetailModal.classList.contains('hidden')) {
+          clueDetailModal.classList.add('hidden');
+          clueDetailModal.classList.remove('flex');
+        } else if (notebookDrawer.classList.contains('translate-x-0')) {
+          toggleNotebook(false);
+        }
+      }
+    });
+
+  })();
+</script>
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span>
+</body></html>

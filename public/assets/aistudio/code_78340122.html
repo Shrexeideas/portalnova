@@ -1,0 +1,335 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Syne:wght@600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@100..900&amp;family=Space+Mono:wght@100..900&amp;family=Syne:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}@keyframes pulse-slow{0%,100%{opacity:1;}50%{opacity:0.25;}}.animate-rec-blink{animation:pulse-slow 1.6s cubic-bezier(0.4,0,0.6,1) infinite;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#690005", "surface-dim": "#121416", "surface-container-high": "#282a2c", "primary": "#ffb4ab", "on-error-container": "#ffdad6", "surface-tint": "#ffb4ab", "secondary-container": "#394b5b", "surface-container": "#1e2022", "surface-container-lowest": "#0c0e10", "error-container": "#93000a", "tertiary-fixed-dim": "#cac6bb", "on-tertiary": "#323129", "on-background": "#e2e2e5", "outline-variant": "#5b403d", "surface-bright": "#38393c", "surface-container-highest": "#333537", "inverse-primary": "#ba181b", "on-secondary-fixed": "#0a1d2b", "tertiary": "#cac6bb", "error": "#ffb4ab", "secondary-fixed": "#d2e5f8", "surface-variant": "#333537", "inverse-on-surface": "#2f3033", "on-primary-fixed-variant": "#93000c", "secondary": "#b6c9dc", "on-tertiary-fixed": "#1d1c15", "tertiary-fixed": "#e6e2d7", "on-primary-fixed": "#410002", "on-primary": "#690006", "on-secondary-fixed-variant": "#374958", "on-secondary-container": "#a8bbcd", "on-tertiary-container": "#dcd8cc", "on-tertiary-fixed-variant": "#49473f", "primary-container": "#ba181b", "primary-fixed-dim": "#ffb4ab", "surface": "#121416", "on-surface-variant": "#e4beb9", "on-surface": "#e2e2e5", "background": "#121416", "tertiary-container": "#605e55", "primary-fixed": "#ffdad6", "surface-container-low": "#1a1c1e", "on-secondary": "#203241", "secondary-fixed-dim": "#b6c9dc", "on-primary-container": "#ffccc6", "inverse-surface": "#e2e2e5", "outline": "#ab8985" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-lg": "1.5rem", "gutter": "1rem", "margin-lg": "3rem", "space-md": "1rem", "space-xl": "2.5rem", "space-lg": "1.5rem", "margin": "1.25rem", "space-xs": "0.25rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": ["Syne"], "display-lg": ["Syne"], "body-md": ["Courier Prime"], "body-sm": ["Courier Prime"], "body-lg": ["Courier Prime"], "headline-lg-mobile": ["Syne"], "label-md": ["Space Mono"], "label-lg": ["Space Mono"], "display-lg-mobile": ["Syne"], "label-sm": ["Space Mono"], "headline-sm": ["Syne"], "headline-md": ["Syne"] }, "fontSize": { "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "label-md": ["11px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }], "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-sm": ["9px", { "lineHeight": "12px", "letterSpacing": "0.14em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen relative selection:bg-primary-container selection:text-on-primary-container"><div class="pointer-events-none fixed inset-0 z-40 shadow-[inset_0_0_120px_rgba(0,0,0,0.85)]"></div><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="h-16 w-full px-gutter-lg flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><img alt="Playground Files Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrC_9A2v80bA9bsEM1WSMURDZFXiJN248S_FtVh5vwewyZ4IJc9kuhiR9fAsB6cvQVikPqcGzCph6ZTj2nthJ5P75s77Hr7QmNMawzQ_W7pzB6_rdU5-K5suvfjhE4Cwta6KVGq61NN7dX5bnEgC9OE6StqttLsXUzD5SGBLTN0-4esSAHufgV4Y2Eiunxgu2wKPlXsaUoyZMZMuBKJ9Ty8xdplDDfR9lkDxJxyqlcbF"><div class="hidden sm:flex flex-col"><span class="font-headline-sm text-headline-sm uppercase text-on-surface tracking-wider leading-none">DON'T LOOK AT THE DUCK</span><span class="font-label-sm text-label-sm uppercase text-outline tracking-widest mt-0.5">CASE FILE #89-DUCK / CLASSIFIED / EYES ONLY</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="main-menu" href="#main-menu">MAIN MENU</a><a aria-current="page" class="px-space-sm py-1 font-label-md uppercase tracking-wider transition-all bg-primary-container text-on-primary-container" data-path="case-briefing" href="#case-briefing">CASE BRIEFING</a><a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="gameplay-hud" href="#gameplay-hud">GAMEPLAY HUD</a><a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="investigation-notebook" href="#investigation-notebook">INVESTIGATION NOTEBOOK</a><a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="pause-and-system" href="#pause-and-system">PAUSE &amp; SYSTEM</a><a class="px-space-sm py-1 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="incident-outcome" href="#incident-outcome">INCIDENT OUTCOME</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-md py-1.5 rounded"><div class="flex items-center gap-1 text-primary"><span class="w-2 h-2 rounded-full bg-primary animate-rec-blink"></span><span>REC 00:04:18</span></div><span class="text-outline-variant">|</span><div class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[14px] text-tertiary">graphic_eq</span><span>PARANOIA FREQ: 14.2 Hz</span></div><span class="text-outline-variant">|</span><span class="font-label-sm text-label-sm text-outline">42°19'N 71°04'W</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="flex flex-col w-full relative select-none">
+<!-- Diegetic Case Board Top Surveillance & Forensic Meta -->
+<div class="w-full bg-surface-container-lowest px-gutter-lg py-space-sm flex flex-wrap items-center justify-between gap-space-sm shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5 bg-primary-container px-space-sm py-0.5 rounded text-on-primary-container font-label-md text-label-md uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary-container animate-pulse"></span>
+<span>LEVEL-4 QUARANTINE DOSSIER</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest hidden sm:inline">ARCHIVE REF: BRF-1994-089-VANCE</span>
+</div>
+<div class="flex items-center gap-space-lg font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-tertiary">LOCATION: WILLOW CREEK BOROUGH</span>
+<span class="hidden md:inline text-outline-variant">//</span>
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+        COGNITIVE THREAT TIER: CRITICAL
+      </span>
+</div>
+</div>
+<!-- Primary Interactive Evidence Pinboard -->
+<div class="relative w-full overflow-hidden bg-surface-container-low px-gutter py-space-xl sm:px-gutter-lg lg:py-margin-lg">
+<!-- Directional Overhead Desk Lamp Spotlight Effect -->
+<div class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[720px] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="pointer-events-none absolute -top-32 right-12 w-[420px] h-[420px] rounded-full bg-tertiary/5 blur-[90px]"></div>
+<!-- Background Grid Lines representing Corkboard Wire Grid / Forensic Grid Matrix -->
+<div class="pointer-events-none absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#e2e2e5_1px,transparent_1px),linear-gradient(to_bottom,#e2e2e5_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+<!-- Diegetic Red Connecting Strings (Forensic Pushpin Web SVG Overlay) -->
+<svg class="pointer-events-none absolute inset-0 w-full h-full z-10 opacity-70 hidden md:block" xmlns="http://www.w3.org/2000/svg">
+<!-- String 1: Central Photo to Police Incident Report -->
+<line class="text-primary-container" stroke="currentColor" stroke-dasharray="3 2" stroke-width="1.8" x1="50%" x2="20%" y1="28%" y2="22%"></line>
+<!-- String 2: Central Photo to Crayon Sketch -->
+<line class="text-primary-container" stroke="currentColor" stroke-width="1.8" x1="50%" x2="80%" y1="28%" y2="26%"></line>
+<!-- String 3: Central Photo to Audio Log -->
+<line class="text-primary-container" stroke="currentColor" stroke-dasharray="4 2" stroke-width="1.5" x1="50%" x2="24%" y1="46%" y2="68%"></line>
+<!-- String 4: Crayon Drawing to Newspaper Clipping -->
+<line class="text-primary-container" stroke="currentColor" stroke-width="1.8" x1="80%" x2="76%" y1="36%" y2="66%"></line>
+<!-- Pushpin Node Circles -->
+<circle cx="50%" cy="28%" fill="#ba181b" r="4.5" stroke="#0c0e10" stroke-width="2"></circle>
+<circle cx="20%" cy="22%" fill="#ba181b" r="3.5" stroke="#0c0e10" stroke-width="1.5"></circle>
+<circle cx="80%" cy="26%" fill="#ba181b" r="3.5" stroke="#0c0e10" stroke-width="1.5"></circle>
+<circle cx="24%" cy="68%" fill="#ba181b" r="3.5" stroke="#0c0e10" stroke-width="1.5"></circle>
+<circle cx="76%" cy="66%" fill="#ba181b" r="3.5" stroke="#0c0e10" stroke-width="1.5"></circle>
+</svg>
+<!-- Pinned Evidence Items Matrix -->
+<div class="relative z-20 max-w-7xl mx-auto flex flex-col gap-space-xl">
+<!-- Upper Section: Case Dossier Title Strip & Header Meta -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-space-xs py-0.5 bg-surface-container-highest text-tertiary font-label-sm text-label-sm tracking-widest uppercase">EVIDENCE EXHIBIT 01</span>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">RESTRICTED DOSSIER // DEPT. BEHAVIORAL FORENSICS</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-tight">
+            CASE BRIEFING: <span class="text-primary">THE BOY WHO LOVED DUCKS</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+            Initial field investigation of the November 1994 incident at Willow Creek Borough Playground. Subject vanished after sustained auditory fixation.
+          </p>
+</div>
+<div class="bg-surface-container-high px-space-md py-space-sm rounded shadow-sm flex items-center gap-space-md self-start md:self-auto">
+<div class="w-3 h-3 rounded-full bg-primary animate-rec-blink"></div>
+<div class="flex flex-col font-label-sm text-label-sm">
+<span class="text-on-surface uppercase tracking-wider">RETINAL GAZE STABILITY</span>
+<span class="text-outline">UNCOMPROMISED (0.00% DISTORTION)</span>
+</div>
+</div>
+</div>
+<!-- Asymmetrical 12-Column Corkboard Canvas -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT WING: Police Incident Report (Cols 1-4) -->
+<div class="md:col-span-4 flex flex-col gap-space-lg">
+<!-- Item 2: Police Report Paper Artifact -->
+<div class="group relative bg-tertiary-fixed text-on-tertiary-fixed p-space-md rounded shadow-xl transform md:-rotate-1 transition-transform duration-300 hover:rotate-0">
+<!-- Simulated Weathered Masking Tape Top Pin -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-5 bg-tertiary-fixed-dim/80 shadow-sm transform -rotate-2 pointer-events-none"></div>
+<!-- Pushpin -->
+<div class="absolute -top-1.5 left-4 w-3.5 h-3.5 rounded-full bg-primary-container shadow-md pointer-events-none"></div>
+<div class="flex items-center justify-between mb-space-sm pb-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary">MUNICIPAL POLICE LOG</span>
+<span class="font-label-sm text-label-sm font-bold text-primary-container">#11-94-INCIDENT</span>
+</div>
+<div class="font-body-sm text-body-sm leading-relaxed flex flex-col gap-space-xs text-on-tertiary">
+<p class="font-bold uppercase tracking-wider text-on-tertiary">DATE: NOV 14, 1994 - 03:42 HRS</p>
+<p>
+                Dispatch received 4 independent calls concerning rhythmic, repetitive high-pitch squeaking audible across a 400m radius of Willow Creek Park.
+              </p>
+<div class="bg-surface-container-lowest text-surface-container-lowest select-none px-1 rounded inline-block transition-colors duration-200 hover:bg-surface-container hover:text-on-surface cursor-help" title="Click or hover to reveal classified line">
+                Officer D. [REDACTED] dispatched solo at 03:51.
+              </div>
+<p>
+                Radio communication severed 6 minutes post-entry. Patrol vehicle cruiser #14 recovered with driver door ajar, ignition running, and driver-side mirror completely shattered inward.
+              </p>
+<div class="bg-surface-container-lowest text-surface-container-lowest select-none px-1 rounded inline-block">
+                Officer D. has not returned. Search ongoing under bio-hazard protocols.
+              </div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-on-tertiary-fixed-variant">
+<span>STATUS: UNRESOLVED</span>
+<span class="text-primary-container uppercase font-bold">[ FORENSIC LOG #02 ]</span>
+</div>
+</div>
+<!-- Item 4: Cassette Audio Tape Transcript Card -->
+<div class="relative bg-surface-container-high p-space-md rounded shadow-lg transform md:rotate-1">
+<!-- Adhesive Tape Accent -->
+<div class="absolute -top-2 right-6 w-16 h-4 bg-tertiary-container/40 pointer-events-none transform rotate-3"></div>
+<!-- Pin -->
+<div class="absolute -top-1 left-6 w-3 h-3 rounded-full bg-outline shadow-md"></div>
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[15px]">graphic_eq</span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">AUDIO TAPE 04B TRANSCRIPT</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">REEL-SIDE B</span>
+</div>
+<blockquote class="font-body-md text-body-md text-primary-fixed italic my-space-sm pl-space-sm bg-surface-container px-space-sm py-space-sm rounded">
+              “It doesn't move when you stare at it. But if you look directly at its face... your peripheral vision turns to static.”
+            </blockquote>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>VOICE: INVESTIGATOR K. MILLER</span>
+<span class="text-error uppercase">DECIBEL SPIKE @ 04:12</span>
+</div>
+</div>
+</div>
+<!-- CENTER PIECE: The Boy Photograph & Handwritten Card (Cols 5-8) -->
+<div class="md:col-span-4 flex flex-col items-center">
+<!-- Polaroid / Mounted Archival Photo Container -->
+<div class="relative group w-full bg-tertiary-fixed text-on-tertiary p-space-md pb-space-lg rounded shadow-2xl transform md:-rotate-0.5 transition-transform duration-300 hover:scale-[1.01]">
+<!-- Weathered Yellow Masking Tape Strips on Borders (Replicating Image Tape) -->
+<div class="absolute -top-3 left-8 w-20 h-6 bg-tertiary-fixed-dim/90 shadow-sm pointer-events-none transform -rotate-3 z-30"></div>
+<div class="absolute -top-3 right-8 w-20 h-6 bg-tertiary-fixed-dim/90 shadow-sm pointer-events-none transform rotate-2 z-30"></div>
+<div class="absolute -bottom-3 left-10 w-24 h-6 bg-tertiary-fixed-dim/90 shadow-sm pointer-events-none transform rotate-1 z-30"></div>
+<div class="absolute -bottom-3 right-10 w-24 h-6 bg-tertiary-fixed-dim/90 shadow-sm pointer-events-none transform -rotate-2 z-30"></div>
+<!-- Central Forensic Pushpin -->
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary-container shadow-lg z-40"></div>
+<!-- Archival Photo Header Tag -->
+<div class="flex items-center justify-between mb-space-sm font-label-sm text-label-sm text-on-tertiary-fixed-variant">
+<span>FILE PHOTO #441-A</span>
+<span class="text-primary-container font-bold">WILLOW CREEK PRIMARY</span>
+</div>
+<!-- The Boy's Photograph Image Placeholder -->
+<div class="relative overflow-hidden rounded bg-surface-container-lowest shadow-inner aspect-square w-full">
+
+<!-- Diegetic Subtle Vignette & Scratches Overlay -->
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent"></div>
+<!-- Reticle / Gaze Focal Warning Marker -->
+<div class="absolute bottom-3 right-3 flex items-center gap-1 bg-surface-container-lowest/90 px-space-sm py-0.5 rounded font-label-sm text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink"></span>
+<span>FOVEAL TRACKER: LOCKED</span>
+</div>
+</div>
+<!-- Attached Handwritten Card Tag Below Photo -->
+<div class="mt-space-md bg-surface-container-lowest p-space-sm rounded shadow-sm text-on-surface">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline mb-1">
+<span>INDEXED RECORD</span>
+<span class="text-primary uppercase font-bold">PERSON OF INTEREST</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+<span class="text-primary font-bold">Julian Vance, age 8.</span> Disappeared Nov 14, 1994. Known obsession with rubber ducks.
+              </p>
+<div class="mt-2 pt-1.5 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>FOUND HOLDING: EXHIBIT-00</span>
+<span class="text-tertiary">HEIGHT: 4'1"</span>
+</div>
+</div>
+<!-- Physical Archival Stamp -->
+<div class="mt-space-sm flex justify-center">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-container px-space-sm py-0.5 bg-primary-container/10 rounded">
+                EVIDENCE CLASSIFICATION: COGNITIVE VECTOR
+              </span>
+</div>
+</div>
+</div>
+<!-- RIGHT WING: Crayon Drawing & Newspaper Clipping (Cols 9-12) -->
+<div class="md:col-span-4 flex flex-col gap-space-lg">
+<!-- Item 5: Child's Cryptic Crayon Drawing -->
+<div class="relative bg-surface-container-highest p-space-md rounded shadow-xl transform md:rotate-2 transition-transform duration-300 hover:rotate-0">
+<!-- Masking Tape -->
+<div class="absolute -top-3 left-10 w-20 h-5 bg-tertiary-fixed-dim/80 pointer-events-none transform -rotate-1"></div>
+<!-- Pin -->
+<div class="absolute -top-1.5 right-6 w-3.5 h-3.5 rounded-full bg-primary-container shadow-md"></div>
+<div class="flex items-center justify-between mb-space-xs font-label-sm text-label-sm text-outline">
+<span>ITEM RECOVERED: DESK #4</span>
+<span class="text-primary uppercase">CRAYON ON NEWSPRINT</span>
+</div>
+<!-- Child Drawing Canvas Recreation -->
+<div class="relative bg-surface-container-lowest p-space-md rounded overflow-hidden shadow-inner">
+<div class="flex flex-col items-center justify-center py-space-sm">
+<!-- Inline Stylized Crayon Playground SVG -->
+<svg class="w-full h-36" fill="none" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Playground Slide & Swing Frame in jagged charcoal crayon style -->
+<path d="M20 110L50 30L80 110" stroke="#cac6bb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<path d="M50 30L170 30" stroke="#cac6bb" stroke-linecap="round" stroke-width="3"></path>
+<path d="M170 30L200 110" stroke="#cac6bb" stroke-linecap="round" stroke-width="3"></path>
+<!-- Slide ladder -->
+<path d="M30 85L60 85M35 65L65 65" stroke="#605e55" stroke-linecap="round" stroke-width="2"></path>
+<!-- Swings dangling empty -->
+<line stroke="#605e55" stroke-dasharray="2 2" stroke-width="1.5" x1="90" x2="88" y1="32" y2="80"></line>
+<line stroke="#605e55" stroke-dasharray="2 2" stroke-width="1.5" x1="110" x2="108" y1="32" y2="80"></line>
+<rect fill="#605e55" height="4" width="34" x="82" y="80"></rect>
+<!-- Disproportionate Looming Yellow Duck / Creature atop slide -->
+<path d="M150 40 C145 20, 185 10, 195 28 C205 28, 215 36, 210 44 C205 50, 190 55, 175 52 C160 55, 145 50, 150 40 Z" fill="#cac6bb" opacity="0.9"></path>
+<!-- Beak / Menace -->
+<path d="M210 38 L225 40 L212 45 Z" fill="#ffb4ab"></path>
+<!-- Staring Void Eye -->
+<circle cx="192" cy="28" fill="#ba181b" r="4"></circle>
+<circle cx="192" cy="28" fill="#0c0e10" r="1.5"></circle>
+<!-- Scribbled Ground -->
+<path d="M5 112 C40 108, 90 115, 140 109 C180 113, 210 110, 235 112" stroke="#333537" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<!-- Scrawled Child Text -->
+<div class="mt-space-xs text-center">
+<span class="font-headline-sm text-headline-sm font-bold text-primary tracking-widest uppercase">
+                    HE IS WATCHING
+                  </span>
+</div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm italic">
+              Recovered from Julian's school desk, dated 48 hours prior to disappearance. Forensic graphology notes severe hand tremor in letterforms.
+            </p>
+</div>
+<!-- Item 3: Faded Newspaper Clipping Headline -->
+<div class="relative bg-tertiary text-on-tertiary p-space-md rounded shadow-lg transform md:-rotate-1">
+<!-- Pin -->
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-primary shadow-md"></div>
+<div class="pb-space-xs mb-space-xs font-label-sm text-label-sm text-on-tertiary-fixed-variant flex items-center justify-between uppercase">
+<span>THE VALLEY GAZETTE // NOV 19, 1994</span>
+<span>PAGE A-4</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm uppercase font-bold leading-tight text-on-tertiary tracking-tight mb-space-sm">
+              SEARCH CALLED OFF AT WILLOW CREEK PLAYGROUND — THIRD INVESTIGATOR HOSPITALIZED FOR PSYCHOSIS
+            </h2>
+<p class="font-body-sm text-body-sm leading-relaxed text-on-tertiary">
+              Federal responders established a perimeter fence around the municipal recreation area at dusk yesterday. Local precinct officials confirm all canine search units refused to cross the perimeter tree-line.
+            </p>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-outline-variant font-bold">
+<span>QUARANTINE ORDER #44-B</span>
+<span class="text-primary-container uppercase">EXHIBIT CONFISCATED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Peripheral Psychosis Telemetry Sparkline Strip -->
+<div class="w-full bg-surface-container px-space-md py-space-sm rounded flex flex-col md:flex-row items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">BASELINE NEURO-TELEMETRY</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline hidden sm:inline">SANITY DRIFT: 0.04% // AMBIENT STATIC: 14.2 Hz</span>
+</div>
+<!-- Inline Sparkline Data Visualization (Sanity Static Curve) -->
+<div class="flex items-center gap-space-md w-full md:w-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">RETINAL EXPOSURE RATE</span>
+<svg class="h-6 w-48 text-primary" fill="none" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 12 L30 12 L38 4 L46 20 L54 8 L62 16 L70 12 L100 12 L110 2 L120 22 L130 10 L140 14 L160 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+</svg>
+<span class="font-label-sm text-label-sm text-tertiary">NOMINAL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Command & Tactical Action Bar -->
+<div class="sticky bottom-0 z-30 w-full bg-surface-container-lowest/95 backdrop-blur-xl px-gutter-lg py-space-md shadow-[0_-4px_24px_rgba(0,0,0,0.85)]">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-space-md">
+<!-- Warning Disclaimer -->
+<div class="flex items-start gap-space-sm max-w-xl">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">report_problem</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-primary">
+            PHYSIOLOGICAL RISK PROTOCOL
+          </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Direct focal gaze tracking will trigger sensory distortion. If creature manifests, break eye contact immediately and monitor via peripheral sightline only.
+          </p>
+</div>
+</div>
+<!-- Action Button Triggers -->
+<div class="flex items-center gap-space-md w-full sm:w-auto justify-end">
+<!-- Secondary Button: Examine Full Dossier -->
+<button class="flex-1 sm:flex-initial px-space-lg py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md uppercase tracking-wider rounded transition-all shadow-sm flex items-center justify-center gap-1.5" id="btn-examine" type="button" onclick="const o=document.getElementById('glitch-transition-overlay');if(o){o.classList.remove('opacity-0');o.classList.add('opacity-100');setTimeout(()=&gt;{window.location.hash='#investigation-notebook';o.classList.remove('opacity-100');o.classList.add('opacity-0');},350);}else{window.location.hash='#investigation-notebook';}">
+<span class="material-symbols-outlined text-[16px] text-tertiary">folder_open</span>
+<span>[ EXAMINE FULL DOSSIER ]</span>
+</button>
+<!-- Primary CTA: Start Investigation -->
+<button class="flex-1 sm:flex-initial relative group px-space-xl py-space-sm bg-primary-container hover:bg-inverse-primary text-on-primary font-headline-sm text-headline-sm uppercase tracking-wider rounded transition-all duration-200 shadow-xl flex items-center justify-center gap-space-sm active:translate-y-0.5" id="btn-enter" type="button" onclick="const o=document.getElementById('glitch-transition-overlay');if(o){o.classList.remove('opacity-0');o.classList.add('opacity-100');setTimeout(()=&gt;{window.location.hash='#gameplay-hud';o.classList.remove('opacity-100');o.classList.add('opacity-0');},350);}else{window.location.hash='#gameplay-hud';}">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">sensors</span>
+<span>START INVESTIGATION (ENTER PLAYGROUND)</span>
+<span class="w-2 h-2 rounded-full bg-on-primary animate-rec-blink"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Ambient Interactivity Script for Case Briefing Micro-Interactions -->
+<script>
+    (function initBriefingInteractions() {
+      const enterBtn = document.getElementById('btn-enter');
+      const examineBtn = document.getElementById('btn-examine');
+
+      if (enterBtn) {
+        enterBtn.addEventListener('click', () => {
+          // Playful diegetic audio static click simulation
+          enterBtn.classList.add('opacity-80', 'scale-[0.98]');
+          setTimeout(() => {
+            enterBtn.classList.remove('opacity-80', 'scale-[0.98]');
+            // Navigate or activate HUD view if path routing is handled
+            const hudNav = document.querySelector('nav a[data-path="gameplay-hud"]');
+            if (hudNav) {
+              hudNav.click();
+            } else {
+              window.location.hash = '#gameplay-hud';
+            }
+          }, 180);
+        });
+      }
+
+      if (examineBtn) {
+        examineBtn.addEventListener('click', () => {
+          const notebookNav = document.querySelector('nav a[data-path="investigation-notebook"]');
+          if (notebookNav) {
+            notebookNav.click();
+          } else {
+            window.location.hash = '#investigation-notebook';
+          }
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)] py-space-md"><div class="w-full px-gutter-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-rec-blink"></span><span>SURVEILLANCE NODE: OAK-PARK-FEED-07</span><span>//</span><span>TERMINAL AUTH: AGENT-ARCHIVIST #412</span></div><div class="font-label-sm text-label-sm text-on-surface-variant text-center">© 1989 FEDERAL BEHAVIORAL ANOMALY REPOSITORY. UNAUTHORIZED DISCLOSURE IS PUNISHABLE BY PERMANENT QUARANTINE.</div><div class="font-label-sm text-label-sm text-primary tracking-widest uppercase">DO NOT MAINTAIN DIRECT EYE CONTACT</div></div></footer>
+
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span><div id="glitch-transition-overlay" class="pointer-events-none fixed inset-0 z-50 opacity-0 transition-opacity duration-200 bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-center"><div class="flex flex-col items-center gap-space-sm font-label-sm uppercase tracking-widest text-primary animate-pulse"><span class="material-symbols-outlined text-[32px]">sensors</span><span>SWITCHING COGNITIVE FEED...</span></div></div>
+
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span></body></html>
